@@ -1,7 +1,11 @@
 import React from "react";
 import { AppLoading, Asset, Font } from "expo";
 import { Ionicons } from "@expo/vector-icons";
-import { StyleSheet, Text, View } from "react-native";
+import { Provider } from "react-redux";
+import { StyleSheet, Text, View, AsyncStorage } from "react-native";
+import { PersistGate } from "redux-persist/es/integration/react";
+import configureStore from "./redux/configureStore";
+const { persistor, store } = configureStore();
 
 export default class App extends React.Component {
   state = {
@@ -19,9 +23,13 @@ export default class App extends React.Component {
       );
     } else {
       return (
-        <View style={styles.container}>
-          <Text>Open up App.js to start working on your app!</Text>
-        </View>
+        <Provider store={store}>
+          <PersistGate persistor={persistor}>
+            <View style={styles.container}>
+              <Text>Open up App.js to start working on your app!</Text>
+            </View>
+          </PersistGate>
+        </Provider>
       );
     }
   }
@@ -36,7 +44,7 @@ export default class App extends React.Component {
   _handleLoadingError = error => {
     console.error(error);
   };
-  _handleFinishLoading = () => {
+  _handleFinishLoading = async () => {
     this.setState({ isLoadingComplete: true });
   };
 }
