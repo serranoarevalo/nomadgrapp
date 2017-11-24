@@ -6,6 +6,7 @@ import { StyleSheet, Text, View, AsyncStorage } from "react-native";
 import { PersistGate } from "redux-persist/es/integration/react";
 import configureStore from "./redux/configureStore";
 const { persistor, store } = configureStore();
+import LoggedOutNavigation from "./navigation/LoggedOutNavigation";
 
 export default class App extends React.Component {
   state = {
@@ -22,11 +23,16 @@ export default class App extends React.Component {
         />
       );
     } else {
+      const state = store.getState();
       return (
         <Provider store={store}>
           <PersistGate persistor={persistor}>
             <View style={styles.container}>
-              <Text>Open up App.js to start working on your app!</Text>
+              {state.user.isLoggedIn ? (
+                <Text>Hello User</Text>
+              ) : (
+                <LoggedOutNavigation />
+              )}
             </View>
           </PersistGate>
         </Provider>
@@ -35,7 +41,10 @@ export default class App extends React.Component {
   }
   _loadAssetsAsync = async () => {
     return Promise.all([
-      Asset.loadAsync([require("./assets/images/logo.png")]),
+      Asset.loadAsync([
+        require("./assets/images/logo.png"),
+        require("./assets/images/logo-white.png")
+      ]),
       Font.loadAsync({
         ...Ionicons.font
       })
@@ -53,7 +62,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
+    alignItems: "stretch",
     justifyContent: "center"
   }
 });
