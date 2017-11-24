@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "nomadgrapp",
-    "description": "An empty new project",
+    "description": "Instagram Cloned in React Natvie",
     "slug": "nomadgrapp",
     "privacy": "public",
     "sdkVersion": "23.0.0",
@@ -15,7 +15,7 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": false
     }
   }
 }
