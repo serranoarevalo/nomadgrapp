@@ -1,5 +1,4 @@
 import { StackNavigator } from "react-navigation";
-
 import LoginScreen from "../screens/LoginScreen";
 
 const LoggedOutNavigation = StackNavigator({
