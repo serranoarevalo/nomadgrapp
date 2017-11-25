@@ -1,20 +1,48 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { View, TextInput, StyleSheet, Dimensions } from "react-native";
 const width = Dimensions.get("window").width;
 
-const LoginTextInput = (props, context) => (
-  <TextInput
-    style={styles.textInput}
-    onChangeText={props.onChange}
-    value={props.value}
-    placeholder={props.placeholder}
-    autoCapitalize={"none"}
-    autoCorrect={false}
-    secureTextEntry={props.secureTextEntry}
-    returnKeyType={props.returnKeyType}
-  />
-);
+class LoginTextInput extends Component {
+  componentWillReceiveProps = nextProps => {
+    if (nextProps.focus) {
+      this.input.focus();
+    }
+  };
+
+  static propTypes = {
+    onChange: PropTypes.func.isRequired,
+    value: PropTypes.string.isRequired,
+    placeholder: PropTypes.string.isRequired,
+    returnKeyType: PropTypes.string.isRequired,
+    secureTextEntry: PropTypes.bool,
+    onSubmit: PropTypes.func.isRequired
+  };
+  render() {
+    const {
+      onChange,
+      value,
+      placeholder,
+      secureTextEntry,
+      returnKeyType,
+      onSubmit
+    } = this.props;
+    return (
+      <TextInput
+        style={styles.textInput}
+        onChangeText={onChange}
+        value={value}
+        placeholder={placeholder}
+        autoCapitalize={"none"}
+        autoCorrect={false}
+        secureTextEntry={secureTextEntry}
+        returnKeyType={returnKeyType}
+        onSubmitEditing={onSubmit}
+        ref={input => (this.input = input)}
+      />
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   textInput: {
@@ -30,13 +58,5 @@ const styles = StyleSheet.create({
     lineHeight: 20
   }
 });
-
-LoginTextInput.propTypes = {
-  onChange: PropTypes.func.isRequired,
-  value: PropTypes.string.isRequired,
-  placeholder: PropTypes.string.isRequired,
-  returnKeyType: PropTypes.string.isRequired,
-  secureTextEntry: PropTypes.bool
-};
 
 export default LoginTextInput;

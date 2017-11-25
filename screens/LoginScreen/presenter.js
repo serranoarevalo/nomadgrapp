@@ -15,10 +15,12 @@ const width = Dimensions.get("window").width;
 class LoginScreen extends Component {
   state = {
     username: "",
-    password: ""
+    password: "",
+    isSubmitting: false,
+    passwordFocused: false
   };
   render() {
-    const { username, password } = this.state;
+    const { username, password, isSubmitting, passwordFocused } = this.state;
     return (
       <View style={styles.container}>
         <StatusBar barStyle="light-content" />
@@ -35,6 +37,7 @@ class LoginScreen extends Component {
             placeholder={"Username"}
             returnKeyType={"next"}
             value={username}
+            onSubmit={this._handleOnUsernameSubmit}
           />
           <LoginTextInput
             placeholder={"Password"}
@@ -42,8 +45,14 @@ class LoginScreen extends Component {
             secureTextEntry={true}
             onChange={this._handlePasswordChange}
             value={password}
+            focus={passwordFocused}
+            onSubmit={this._handleSubmit}
           />
-          <LoginButton text={"Login"} isSubmitting={false} />
+          <LoginButton
+            onTap={this._handleSubmit}
+            text={"Login"}
+            isSubmitting={isSubmitting}
+          />
         </View>
       </View>
     );
@@ -53,10 +62,25 @@ class LoginScreen extends Component {
       username: text
     });
   };
-  _handlePasswordChange = password => {
+  _handlePasswordChange = text => {
     this.setState({
       password: text
     });
+  };
+  _handleOnUsernameSubmit = () => {
+    this.setState({
+      passwordFocused: true
+    });
+  };
+  _handleSubmit = () => {
+    const { username, password, isSubmitting } = this.state;
+    if (username && password) {
+      if (!isSubmitting) {
+        this.setState({
+          isSubmitting: true
+        });
+      }
+    }
   };
 }
 

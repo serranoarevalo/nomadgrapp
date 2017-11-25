@@ -11,7 +11,7 @@ import {
 const width = Dimensions.get("window").width;
 
 const LoginButton = (props, context) => (
-  <TouchableOpacity>
+  <TouchableOpacity onPressOut={props.onTap}>
     <View style={styles.container}>
       {props.isSubmitting ? (
         <ActivityIndicator color="white" />
@@ -39,7 +39,8 @@ const styles = StyleSheet.create({
 });
 
 LoginButton.propTypes = {
-  isSubmitting: PropTypes.bool.isRequired
+  isSubmitting: PropTypes.bool.isRequired,
+  onTap: PropTypes.func.isRequired
 };
 
 export default LoginButton;
