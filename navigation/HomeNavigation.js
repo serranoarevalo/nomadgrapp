@@ -2,6 +2,7 @@ import { StackNavigator } from "react-navigation";
 import FeedScreen from "../screens/FeedScreen";
 import LikesScreen from "../screens/LikesScreen";
 import CommentsScreen from "../screens/CommentsScreen";
+import BackButton from "../components/BackButton";
 
 const HomeNavigation = StackNavigator(
   {
@@ -13,7 +14,9 @@ const HomeNavigation = StackNavigator(
     }
   },
   {
-    headerMode: "float"
+    navigationOptions: {
+      headerLeft: BackButton
+    }
   }
 );
 
