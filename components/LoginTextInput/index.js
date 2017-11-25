@@ -32,10 +32,9 @@ const styles = StyleSheet.create({
 });
 
 LoginTextInput.propTypes = {
-  onChange: PropTypes.func,
-  value: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
-
   returnKeyType: PropTypes.string.isRequired,
   secureTextEntry: PropTypes.bool
 };

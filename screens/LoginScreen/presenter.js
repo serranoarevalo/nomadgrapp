@@ -13,7 +13,12 @@ import LoginButton from "../../components/LoginButton";
 const width = Dimensions.get("window").width;
 
 class LoginScreen extends Component {
+  state = {
+    username: "",
+    password: ""
+  };
   render() {
+    const { username, password } = this.state;
     return (
       <View style={styles.container}>
         <StatusBar barStyle="light-content" />
@@ -25,17 +30,34 @@ class LoginScreen extends Component {
           />
         </View>
         <View style={styles.content}>
-          <LoginTextInput placeholder={"Username"} returnKeyType={"next"} />
+          <LoginTextInput
+            onChange={this._handleUsernameChange}
+            placeholder={"Username"}
+            returnKeyType={"next"}
+            value={username}
+          />
           <LoginTextInput
             placeholder={"Password"}
             returnKeyType={"go"}
             secureTextEntry={true}
+            onChange={this._handlePasswordChange}
+            value={password}
           />
           <LoginButton text={"Login"} isSubmitting={false} />
         </View>
       </View>
     );
   }
+  _handleUsernameChange = text => {
+    this.setState({
+      username: text
+    });
+  };
+  _handlePasswordChange = password => {
+    this.setState({
+      password: text
+    });
+  };
 }
 
 const styles = StyleSheet.create({
