@@ -18,7 +18,7 @@ class LogInScreen extends Component {
         <View style={styles.header}>
           <Image
             source={require("../assets/images/logo-white.png")}
-            resizeMode="center"
+            resizeMode="stretch"
             style={styles.logo}
           />
         </View>
@@ -41,11 +41,14 @@ const styles = StyleSheet.create({
     width
   },
   logo: {
-    width: 250
+    width: 182,
+    height: 59,
+    marginTop: 20
   },
   content: {
-    flex: 3,
-    backgroundColor: "red"
+    flex: 4,
+    backgroundColor: "white",
+    paddingTop: 40
   }
 });
 
