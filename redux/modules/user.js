@@ -1,5 +1,5 @@
 // imports
-
+import { API_URL } from "../../constants";
 import { actionCreators as userActions } from "./ui";
 // actions
 const SAVE_TOKEN = "SAVE_TOKEN";
@@ -18,7 +18,7 @@ function saveToken(token) {
 function login(username, password) {
   return dispatch => {
     dispatch(userActions.setFetching());
-    fetch("/rest-auth/login/", {
+    fetch(`${API_URL}/rest-auth/login/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
