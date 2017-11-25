@@ -1,27 +1,54 @@
 import React from "react";
+import { View } from "react-native";
 import { TabNavigator, TabBarBottom } from "react-navigation";
-import HomeScreen from "../screens/HomeScreen";
-import SearchScreen from "../screens/SearchScreen";
-import AddPhotoLink from "../screens/AddPhotoLink";
-import NotificationScreen from "../screens/NotificationScreen";
-import ProfileScreen from "../screens/ProfileScreen";
+import HomeRoute from "../routes/HomeRoute";
+import SearchRoute from "../routes/SearchRoute";
+import NotificationsRoute from "../routes/NotificationsRoute";
+import ProfileRoute from "../routes/ProfileRoute";
+import { Ionicons } from "@expo/vector-icons";
+
 
 const TabsNavigation = TabNavigator(
   {
     Home: {
-      screen: HomeScreen
+      screen: HomeRoute,
+      navigationOptions: {
+        tabBarIcon: ({focused}) => (
+          <Ionicons name={focused ? "ios-home" : "ios-home-outline"} size={30} color={"black"} />
+        )
+      }
     },
     Search: {
-      screen: SearchScreen
+      screen: SearchRoute,
+      navigationOptions: {
+        tabBarIcon: ({focused}) => (
+          <Ionicons name={focused ? "ios-search" : "ios-search-outline"} size={30} color={"black"} />
+        )
+      }
     },
-    AddPhotoLink: {
-      screen: AddPhotoLink,
+    AddPhoto: {
+      screen:  View,
+      navigationOptions: {
+        tabBarIcon: ({ focused }) => (
+          <Ionicons name="ios-add-circle-outline" size={30} color={"black"} />
+        ),
+      },
     },
-    Notification: {
-      screen: NotificationScreen
+    Notifications: {
+      screen: NotificationsRoute,
+      navigationOptions: {
+        tabBarIcon: ({focused}) => (
+          <Ionicons name={focused ? "ios-heart" : "ios-heart-outline"} size={30} color={"black"} />
+        )
+      }
     },
     Profile: {
-      screen: ProfileScreen
+      screen: ProfileRoute,
+      navigationOptions: {
+        tabBarIcon: ({focused}) => (
+          <Ionicons name={focused ? "ios-person" : "ios-person-outline"} size={30} color={"black"} />
+        )
+      }
     },
   },
   {

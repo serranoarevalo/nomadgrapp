@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Ionicons } from "@expo/vector-icons";
-import NotificationScreen from "./presenter";
+import NotificationsScreen from "./presenter";
 
 class Container extends Component {
   static navigationOptions = {
@@ -14,7 +14,7 @@ class Container extends Component {
     }
   };
   render() {
-    return <NotificationScreen />;
+    return <NotificationsScreen />;
   }
 }
 

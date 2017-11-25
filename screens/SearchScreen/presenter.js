@@ -1,7 +1,10 @@
 import React from "react";
-import { Text } from "react-native";
-import PropTypes from "prop-types";
+import { Text, TouchableHighlight } from "react-native";
 
-const SearchScreen = props => <Text>SeARCH!</Text>;
+const SearchScreen = props => (
+  <TouchableHighlight onPress={() => props.navigate("Likes")}>
+    <Text>Search!</Text>
+  </TouchableHighlight>
+);
 
 export default SearchScreen;
