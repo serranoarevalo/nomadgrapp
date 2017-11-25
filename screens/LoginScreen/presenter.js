@@ -6,8 +6,10 @@ import {
   StyleSheet,
   StatusBar,
   Dimensions,
-  Alert
+  Alert,
+  TouchableOpacity
 } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import LoginTextInput from "../../components/LoginTextInput";
 import LoginButton from "../../components/LoginButton";
 
@@ -57,6 +59,15 @@ class LoginScreen extends Component {
             isSubmitting={isSubmitting}
             enabled={username && password ? true : false}
           />
+          <TouchableOpacity
+            style={styles.fbContainer}
+            onPressOut={() => alert("hello")}
+          >
+            <View style={styles.fbView}>
+              <Ionicons name="logo-facebook" size={22} color="#3E99EE" />
+              <Text style={styles.fbText}>Log in with Facebook</Text>
+            </View>
+          </TouchableOpacity>
         </View>
       </View>
     );
@@ -119,6 +130,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width,
     justifyContent: "flex-start"
+  },
+  fbContainer: {
+    marginTop: 40
+  },
+  fbView: {
+    alignItems: "center",
+    flexDirection: "row"
+  },
+  fbText: {
+    color: "#3E99EE",
+    fontWeight: "600",
+    marginLeft: 10
   }
 });
 
