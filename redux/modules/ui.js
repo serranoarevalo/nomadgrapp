@@ -23,13 +23,15 @@ function unsetFetching() {
 
 // initial State
 
+const initialState = {};
+
 // reducer
 
 function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_FETCHING:
       return applySetFetching(state, action);
-    case UNSER_FETCHING:
+    case UNSET_FETCHING:
       return applyUnsetFetching(state, action);
     default:
       return state;
