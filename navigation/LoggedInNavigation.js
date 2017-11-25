@@ -2,7 +2,8 @@ import React from "react";
 import { TabNavigator, TabBarBottom, StackNavigator } from "react-navigation";
 import HomeScreen from "../screens/HomeScreen";
 import SearchScreen from "../screens/SearchScreen";
-import AddPhotoScreen from "../screens/AddPhoto";
+import AddPhotoScreen from "../screens/AddPhotoScreen";
+import AddPhotoLink from "../screens/AddPhotoLink";
 const LoggedInNavigation = TabNavigator(
   {
     Home: {
@@ -10,10 +11,25 @@ const LoggedInNavigation = TabNavigator(
     },
     Search: {
       screen: SearchScreen
+    },
+    AddPhotoLink: {
+      screen: AddPhotoLink,
     }
   },
   {
-    tabBarComponent: TabBarBottom,
+    tabBarComponent: ({jumpToIndex, ...props, navigation}) => (
+      <TabBarBottom
+          {...props}
+          jumpToIndex={index => {
+              if (index === 2) {
+                  navigation.navigate('AddPhoto')
+              }
+              else {
+                  jumpToIndex(index)
+              }
+          }}
+      />
+    ),
     tabBarPosition: "bottom",
     tabBarOptions: {
       showLabel: false,
