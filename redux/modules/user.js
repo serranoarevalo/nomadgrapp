@@ -2,14 +2,20 @@
 import { API_URL } from "../../constants";
 import { actionCreators as userActions } from "./ui";
 // actions
-const SAVE_TOKEN = "SAVE_TOKEN";
-
+const LOG_IN = "LOG_IN";
+const LOG_OUT = "LOG_OUT";
 // action creators
 
-function saveToken(token) {
+function setLogIn(token) {
   return {
-    type: SAVE_TOKEN,
+    type: LOG_IN,
     token
+  };
+}
+
+function logout() {
+  return {
+    type: LOG_OUT
   };
 }
 
@@ -32,7 +38,7 @@ function login(username, password) {
       .then(json => {
         if (json.token) {
           dispatch(userActions.unsetFetching());
-          dispatch(saveToken(json.token));
+          dispatch(setLogIn(json.token));
         } else {
           dispatch(userActions.unsetFetching());
         }
@@ -50,8 +56,10 @@ const initialState = {
 
 function reducer(state = initialState, action) {
   switch (action.type) {
-    case SAVE_TOKEN:
-      return applySaveToken(state, action);
+    case LOG_IN:
+      return applySetLogIn(state, action);
+    case LOG_OUT:
+      return applyLogOut();
     default:
       return state;
   }
@@ -59,15 +67,24 @@ function reducer(state = initialState, action) {
 
 // reducer actions
 
-function applySaveToken(state, action) {
+function applySetLogIn(state, action) {
   const { token } = action;
   return { ...state, isLoggedIn: true, token };
+}
+
+function applyLogOut(state, action) {
+  return {
+    ...state,
+    isLoggedIn: false,
+    token: ""
+  };
 }
 
 // exports
 
 const actionCreators = {
-  login
+  login,
+  logout
 };
 
 export { actionCreators };
