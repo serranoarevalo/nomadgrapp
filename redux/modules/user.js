@@ -2,6 +2,7 @@
 import { API_URL, FB_APP_ID } from "../../constants";
 import { actionCreators as userActions } from "./ui";
 import { Facebook } from "expo";
+import { Alert } from "react-native";
 // actions
 const LOG_IN = "LOG_IN";
 const LOG_OUT = "LOG_OUT";
@@ -41,6 +42,7 @@ function login(username, password) {
           dispatch(userActions.unsetFetching());
           dispatch(setLogIn(json.token));
         } else {
+          Alert.alert("Something went wrong, try again");
           dispatch(userActions.unsetFetching());
         }
       });
@@ -70,6 +72,9 @@ function facebookLogin() {
         .then(json => {
           if (json.token) {
             dispatch(setLogIn(json.token));
+            dispatch(userActions.unsetFetching());
+          } else {
+            Alert.alert("Something went wrong, try again");
             dispatch(userActions.unsetFetching());
           }
         })
