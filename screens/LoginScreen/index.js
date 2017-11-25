@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import Container from "./container";
-import { actionCreators as uiActions } from "../../redux/modules/ui";
+import { actionCreators as userActions } from "../../redux/modules/user";
 
 const mapStateToProps = (state, ownProps) => {
   const { ui } = state;
@@ -9,11 +9,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    startFetching: () => {
-      dispatch(uiActions.setFetching());
-    },
-    stopFetching: () => {
-      dispatch(uiActions.unsetFetching());
+    login: (username, password) => {
+      dispatch(userActions.login(username, password));
     }
   };
 };

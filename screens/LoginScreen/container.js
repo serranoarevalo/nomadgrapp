@@ -8,8 +8,7 @@ class Container extends Component {
   };
   static propTypes = {
     isSubmitting: PropTypes.bool.isRequired,
-    startFetching: PropTypes.func.isRequired,
-    stopFetching: PropTypes.func.isRequired
+    login: PropTypes.func.isRequired
   };
   state = {
     username: "",
@@ -52,10 +51,10 @@ class Container extends Component {
   };
   _handleSubmit = () => {
     const { username, password } = this.state;
-    const { startFetching, stopFetching, isSubmitting } = this.props;
+    const { login, isSubmitting } = this.props;
     if (username && password) {
       if (!isSubmitting) {
-        startFetching();
+        login(username, password);
       }
     } else {
       Alert.alert("All fields are required");
