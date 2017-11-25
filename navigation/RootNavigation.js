@@ -1,11 +1,11 @@
 import { StackNavigator } from "react-navigation";
 import AddPhotoScreen from "../screens/ProfileScreen";
-import LoggedInNavigation from "./LoggedInNavigation";
+import TabsNavigation from "./TabsNavigation";
 
 const RootNavigator = StackNavigator(
   {
     MainTabNavigator: {
-      screen: LoggedInNavigation
+      screen: TabsNavigation
     },
     AddPhoto: {
       screen: AddPhotoScreen,
