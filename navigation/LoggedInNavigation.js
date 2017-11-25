@@ -4,6 +4,8 @@ import HomeScreen from "../screens/HomeScreen";
 import SearchScreen from "../screens/SearchScreen";
 import AddPhotoScreen from "../screens/AddPhotoScreen";
 import AddPhotoLink from "../screens/AddPhotoLink";
+import NotificationScreen from "../screens/NotificationScreen";
+import ProfileScreen from "../screens/ProfileScreen";
 const LoggedInNavigation = TabNavigator(
   {
     Home: {
@@ -14,7 +16,13 @@ const LoggedInNavigation = TabNavigator(
     },
     AddPhotoLink: {
       screen: AddPhotoLink,
-    }
+    },
+    Notification: {
+      screen: NotificationScreen
+    },
+    Profile: {
+      screen: ProfileScreen
+    },
   },
   {
     tabBarComponent: ({jumpToIndex, ...props, navigation}) => (
