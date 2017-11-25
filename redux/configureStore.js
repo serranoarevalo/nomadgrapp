@@ -3,16 +3,19 @@ import { persistStore, persistCombineReducers } from "redux-persist";
 import storage from "redux-persist/es/storage";
 import thunk from "redux-thunk";
 import user from "./modules/user";
+import ui from "./modules/ui";
 
 const middlewares = [thunk];
 
 const persistConfig = {
   key: "root",
-  storage
+  storage,
+  blacklist: ["ui"]
 };
 
 const reducer = persistCombineReducers(persistConfig, {
-  user
+  user,
+  ui
 });
 
 const configureStore = () => {
