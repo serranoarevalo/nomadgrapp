@@ -11,7 +11,6 @@ const LoginTextInput = (props, context) => (
     placeholder={props.placeholder}
     autoCapitalize={"none"}
     autoCorrect={false}
-    autoFocus={props.autoFocus}
     secureTextEntry={props.secureTextEntry}
     returnKeyType={props.returnKeyType}
   />
@@ -36,7 +35,7 @@ LoginTextInput.propTypes = {
   onChange: PropTypes.func,
   value: PropTypes.string,
   placeholder: PropTypes.string.isRequired,
-  autoFocus: PropTypes.bool.isRequired,
+
   returnKeyType: PropTypes.string.isRequired,
   secureTextEntry: PropTypes.bool
 };

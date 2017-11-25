@@ -25,18 +25,13 @@ class LoginScreen extends Component {
           />
         </View>
         <View style={styles.content}>
-          <LoginTextInput
-            placeholder={"Username"}
-            autoFocus={true}
-            returnKeyType={"next"}
-          />
+          <LoginTextInput placeholder={"Username"} returnKeyType={"next"} />
           <LoginTextInput
             placeholder={"Password"}
-            autoFocus={false}
             returnKeyType={"go"}
             secureTextEntry={true}
           />
-          <LoginButton text={"Login"} />
+          <LoginButton text={"Login"} isSubmitting={false} />
         </View>
       </View>
     );
