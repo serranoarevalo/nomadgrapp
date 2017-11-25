@@ -52,6 +52,7 @@ class LoginScreen extends Component {
             onTap={this._handleSubmit}
             text={"Login"}
             isSubmitting={isSubmitting}
+            enabled={username && password ? true : false}
           />
         </View>
       </View>

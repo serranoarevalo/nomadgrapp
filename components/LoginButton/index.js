@@ -11,8 +11,14 @@ import {
 const width = Dimensions.get("window").width;
 
 const LoginButton = (props, context) => (
-  <TouchableOpacity onPressOut={props.onTap}>
-    <View style={styles.container}>
+  <TouchableOpacity onPressOut={props.onTap} disabled={!props.enabled}>
+    <View
+      style={
+        props.enabled
+          ? [styles.container, styles.enabledBtn]
+          : [styles.container, styles.disabledBtn]
+      }
+    >
       {props.isSubmitting ? (
         <ActivityIndicator color="white" />
       ) : (
@@ -35,12 +41,19 @@ const styles = StyleSheet.create({
   text: {
     fontWeight: "600",
     color: "white"
+  },
+  disabledBtn: {
+    opacity: 0.5
+  },
+  enabledBtn: {
+    opacity: 1
   }
 });
 
 LoginButton.propTypes = {
   isSubmitting: PropTypes.bool.isRequired,
-  onTap: PropTypes.func.isRequired
+  onTap: PropTypes.func.isRequired,
+  enabled: PropTypes.bool.isRequired
 };
 
 export default LoginButton;
