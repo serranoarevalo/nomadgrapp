@@ -1,10 +1,10 @@
 import { StackNavigator } from "react-navigation";
 
-import LogInScreen from "../screens/LogInScreen";
+import LoginScreen from "../screens/LoginScreen";
 
 const LoggedOutNavigation = StackNavigator({
   LogIn: {
-    screen: LogInScreen,
+    screen: LoginScreen,
     navigationOptions: {
       header: null
     }

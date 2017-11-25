@@ -7,22 +7,37 @@ import {
   StatusBar,
   Dimensions
 } from "react-native";
+import LoginTextInput from "../../components/LoginTextInput";
+import LoginButton from "../../components/LoginButton";
 
 const width = Dimensions.get("window").width;
 
-class LogInScreen extends Component {
+class LoginScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
         <StatusBar barStyle="light-content" />
         <View style={styles.header}>
           <Image
-            source={require("../assets/images/logo-white.png")}
+            source={require("../../assets/images/logo-white.png")}
             resizeMode="stretch"
             style={styles.logo}
           />
         </View>
-        <View style={styles.content} />
+        <View style={styles.content}>
+          <LoginTextInput
+            placeholder={"Username"}
+            autoFocus={true}
+            returnKeyType={"next"}
+          />
+          <LoginTextInput
+            placeholder={"Password"}
+            autoFocus={false}
+            returnKeyType={"go"}
+            secureTextEntry={true}
+          />
+          <LoginButton text={"Login"} />
+        </View>
       </View>
     );
   }
@@ -48,8 +63,11 @@ const styles = StyleSheet.create({
   content: {
     flex: 4,
     backgroundColor: "white",
-    paddingTop: 40
+    paddingTop: 20,
+    alignItems: "center",
+    width,
+    justifyContent: "flex-start"
   }
 });
 
-export default LogInScreen;
+export default LoginScreen;
