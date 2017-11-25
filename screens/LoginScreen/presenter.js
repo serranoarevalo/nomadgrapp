@@ -5,7 +5,8 @@ import {
   Image,
   StyleSheet,
   StatusBar,
-  Dimensions
+  Dimensions,
+  Alert
 } from "react-native";
 import LoginTextInput from "../../components/LoginTextInput";
 import LoginButton from "../../components/LoginButton";
@@ -38,6 +39,7 @@ class LoginScreen extends Component {
             returnKeyType={"next"}
             value={username}
             onSubmit={this._handleOnUsernameSubmit}
+            onFocus={this._unfocusPassword}
           />
           <LoginTextInput
             placeholder={"Password"}
@@ -47,6 +49,7 @@ class LoginScreen extends Component {
             value={password}
             focus={passwordFocused}
             onSubmit={this._handleSubmit}
+            onBlur={this._unfocusPassword}
           />
           <LoginButton
             onTap={this._handleSubmit}
@@ -58,6 +61,11 @@ class LoginScreen extends Component {
       </View>
     );
   }
+  _unfocusPassword = () => {
+    this.setState({
+      passwordFocused: false
+    });
+  };
   _handleUsernameChange = text => {
     this.setState({
       username: text
@@ -81,6 +89,8 @@ class LoginScreen extends Component {
           isSubmitting: true
         });
       }
+    } else {
+      Alert.alert("All fields are required");
     }
   };
 }

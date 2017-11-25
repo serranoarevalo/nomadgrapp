@@ -16,7 +16,9 @@ class LoginTextInput extends Component {
     placeholder: PropTypes.string.isRequired,
     returnKeyType: PropTypes.string.isRequired,
     secureTextEntry: PropTypes.bool,
-    onSubmit: PropTypes.func.isRequired
+    onSubmit: PropTypes.func.isRequired,
+    onFocus: PropTypes.func,
+    onBlur: PropTypes.func
   };
   render() {
     const {
@@ -25,7 +27,9 @@ class LoginTextInput extends Component {
       placeholder,
       secureTextEntry,
       returnKeyType,
-      onSubmit
+      onSubmit,
+      onFocus,
+      onBlur
     } = this.props;
     return (
       <TextInput
@@ -39,6 +43,8 @@ class LoginTextInput extends Component {
         returnKeyType={returnKeyType}
         onSubmitEditing={onSubmit}
         ref={input => (this.input = input)}
+        onFocus={onFocus}
+        onBlur={onBlur}
       />
     );
   }
