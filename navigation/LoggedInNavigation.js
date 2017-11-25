@@ -6,6 +6,7 @@ import AddPhotoScreen from "../screens/AddPhotoScreen";
 import AddPhotoLink from "../screens/AddPhotoLink";
 import NotificationScreen from "../screens/NotificationScreen";
 import ProfileScreen from "../screens/ProfileScreen";
+
 const LoggedInNavigation = TabNavigator(
   {
     Home: {
@@ -42,7 +43,7 @@ const LoggedInNavigation = TabNavigator(
     tabBarOptions: {
       showLabel: false,
       style: {
-        backgroundColor: "white",
+        backgroundColor: "#FAFAFA",
         height: 45
       }
     }
