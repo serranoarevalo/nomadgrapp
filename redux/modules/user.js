@@ -1,6 +1,7 @@
 // imports
-import { API_URL } from "../../constants";
+import { API_URL, FB_APP_ID } from "../../constants";
 import { actionCreators as userActions } from "./ui";
+import { Facebook } from "expo";
 // actions
 const LOG_IN = "LOG_IN";
 const LOG_OUT = "LOG_OUT";
@@ -46,6 +47,37 @@ function login(username, password) {
   };
 }
 
+function facebookLogin() {
+  return async dispatch => {
+    dispatch(userActions.setFetching());
+    const { type, token } = await Facebook.logInWithReadPermissionsAsync(
+      FB_APP_ID,
+      {
+        permissions: ["public_profile", "email", "user_friends"]
+      }
+    );
+    if (type === "success") {
+      fetch(`${API_URL}/users/login/facebook/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          access_token: token
+        })
+      })
+        .then(response => response.json())
+        .then(json => {
+          if (json.token) {
+            dispatch(setLogIn(json.token));
+            dispatch(userActions.unsetFetching());
+          }
+        })
+        .catch(err => console.log(err));
+    }
+  };
+}
+
 // initial State
 
 const initialState = {
@@ -84,7 +116,8 @@ function applyLogOut(state, action) {
 
 const actionCreators = {
   login,
-  logout
+  logout,
+  facebookLogin
 };
 
 export { actionCreators };

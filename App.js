@@ -48,6 +48,5 @@ export default class App extends React.Component {
   };
   _handleFinishLoading = async () => {
     this.setState({ isLoadingComplete: true });
-    store.dispatch({ type: "LOG_OUT" });
   };
 }

@@ -8,7 +8,8 @@ class Container extends Component {
   };
   static propTypes = {
     isSubmitting: PropTypes.bool.isRequired,
-    login: PropTypes.func.isRequired
+    login: PropTypes.func.isRequired,
+    fbLogin: PropTypes.func.isRequired
   };
   state = {
     username: "",
@@ -16,7 +17,7 @@ class Container extends Component {
     passwordFocused: false
   };
   render() {
-    const { isSubmitting } = this.props;
+    const { isSubmitting, fbLogin } = this.props;
     return (
       <LoginScreen
         {...this.state}
@@ -26,6 +27,7 @@ class Container extends Component {
         handleOnUsernameSubmit={this._handleOnUsernameSubmit}
         handleSubmit={this._handleSubmit}
         isSubmitting={isSubmitting}
+        fbLogin={fbLogin}
       />
     );
   }

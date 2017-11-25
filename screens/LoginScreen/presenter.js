@@ -51,10 +51,7 @@ const LoginScreen = props => (
         isSubmitting={props.isSubmitting}
         enabled={props.username && props.password ? true : false}
       />
-      <TouchableOpacity
-        style={styles.fbContainer}
-        onPressOut={() => alert("hello")}
-      >
+      <TouchableOpacity style={styles.fbContainer} onPressOut={props.fbLogin}>
         <View style={styles.fbView}>
           <Ionicons name="logo-facebook" size={22} color="#3E99EE" />
           <Text style={styles.fbText}>Log in with Facebook</Text>
@@ -72,7 +69,8 @@ LoginScreen.propTypes = {
   handleUsernameChange: PropTypes.func.isRequired,
   handlePasswordChange: PropTypes.func.isRequired,
   handleOnUsernameSubmit: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequired
+  handleSubmit: PropTypes.func.isRequired,
+  fbLogin: PropTypes.func.isRequired
 };
 
 const styles = StyleSheet.create({
