@@ -1,7 +1,8 @@
 import React from "react";
-import { TabNavigator, TabBarBottom } from "react-navigation";
+import { TabNavigator, TabBarBottom, StackNavigator } from "react-navigation";
 import HomeScreen from "../screens/HomeScreen";
 import SearchScreen from "../screens/SearchScreen";
+import AddPhotoScreen from "../screens/AddPhoto";
 const LoggedInNavigation = TabNavigator(
   {
     Home: {
@@ -14,7 +15,6 @@ const LoggedInNavigation = TabNavigator(
   {
     tabBarComponent: TabBarBottom,
     tabBarPosition: "bottom",
-    swipeEnabled: true,
     tabBarOptions: {
       showLabel: false,
       style: {
@@ -25,4 +25,22 @@ const LoggedInNavigation = TabNavigator(
   }
 );
 
-export default LoggedInNavigation;
+const RootNavigator = StackNavigator(
+  {
+    MainTabNavigator: {
+      screen: LoggedInNavigation
+    },
+    AddPhoto: {
+      screen: AddPhotoScreen,
+      navigationOptions: {
+        gesturesEnabled: true
+      }
+    }
+  },
+  {
+    headerMode: "none",
+    mode: "modal"
+  }
+);
+
+export default RootNavigator;
