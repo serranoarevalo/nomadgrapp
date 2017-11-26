@@ -1,5 +1,6 @@
+import React from "react";
 import LikesScreen from "../screens/LikesScreen";
-import BackButton from "../components/BackButton";
+import NavButton from "../components/NavButton";
 
 const AppRoutes = {
   Likes: {
@@ -9,7 +10,7 @@ const AppRoutes = {
 
 const options = {
   navigationOptions: {
-    headerLeft: BackButton
+    headerLeft: props => <NavButton iconName="ios-arrow-back" {...props} />
   }
 };
 
