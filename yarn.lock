@@ -2895,6 +2895,19 @@ react-devtools-core@^2.5.0:
     shell-quote "^1.6.1"
     ws "^2.0.3"
 
+react-mixin@^3.0.5:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/react-mixin/-/react-mixin-3.1.1.tgz#68749756bfe32699e561372a4aeecb926db72b7f"
+  dependencies:
+    object-assign "^4.0.1"
+    smart-mixin "^2.0.0"
+
+react-native-auto-height-image@^0.3.3:
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/react-native-auto-height-image/-/react-native-auto-height-image-0.3.3.tgz#c8c39478528ad8fefef37b63b72834733b505faf"
+  dependencies:
+    prop-types "^15.5.8"
+
 react-native-branch@2.0.0-beta.3:
   version "2.0.0-beta.3"
   resolved "https://registry.yarnpkg.com/react-native-branch/-/react-native-branch-2.0.0-beta.3.tgz#2167af86bbc9f964bd45bd5f37684e5b54965e32"
@@ -2915,6 +2928,20 @@ react-native-drawer-layout@1.3.2:
   dependencies:
     react-native-dismiss-keyboard "1.0.0"
 
+react-native-fade-in-image@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/react-native-fade-in-image/-/react-native-fade-in-image-1.3.0.tgz#2804ad4bfbe78e2eee373e604437d5c2dec1d9b4"
+  dependencies:
+    react-clone-referenced-element "^1.0.1"
+    react-mixin "^3.0.5"
+    react-timer-mixin "^0.13.3"
+
+react-native-fit-image@^1.5.4:
+  version "1.5.4"
+  resolved "https://registry.yarnpkg.com/react-native-fit-image/-/react-native-fit-image-1.5.4.tgz#73d2fccc7ad902cf2ffcd008a2a74749ad50134a"
+  dependencies:
+    prop-types "^15.5.10"
+
 react-native-gesture-handler@1.0.0-alpha.30:
   version "1.0.0-alpha.30"
   resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.0.0-alpha.30.tgz#7f79c2da5a59cc8ce20cf04c11360409a53bef59"
@@ -2930,6 +2957,10 @@ react-native-safe-module@^1.1.0:
   resolved "https://registry.yarnpkg.com/react-native-safe-module/-/react-native-safe-module-1.2.0.tgz#a23824ca24edc2901913694a76646475113d570d"
   dependencies:
     dedent "^0.6.0"
+
+react-native-scalable-image@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/react-native-scalable-image/-/react-native-scalable-image-0.2.2.tgz#ef8115a583102a2e2a669749b86402b14b5f690a"
 
 "react-native-svg@https://github.com/expo/react-native-svg/archive/5.5.1-exp.1.tar.gz":
   version "5.5.1"
@@ -3039,7 +3070,7 @@ react-redux@^5.0.6:
     loose-envify "^1.1.0"
     prop-types "^15.5.10"
 
-react-timer-mixin@^0.13.2:
+react-timer-mixin@^0.13.2, react-timer-mixin@^0.13.3:
   version "0.13.3"
   resolved "https://registry.yarnpkg.com/react-timer-mixin/-/react-timer-mixin-0.13.3.tgz#0da8b9f807ec07dc3e854d082c737c65605b3d22"
 
@@ -3422,6 +3453,10 @@ slash@^1.0.0:
 slide@^1.1.5:
   version "1.1.6"
   resolved "https://registry.yarnpkg.com/slide/-/slide-1.1.6.tgz#56eb027d65b4d2dce6cb2e2d32c4d4afc9e1d707"
+
+smart-mixin@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/smart-mixin/-/smart-mixin-2.0.0.tgz#a34a1055e32a75b30d2b4e3ca323dc99cb53f437"
 
 sntp@1.x.x:
   version "1.0.9"

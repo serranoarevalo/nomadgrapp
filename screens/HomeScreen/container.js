@@ -50,12 +50,15 @@ class Container extends Component {
   };
 
   render() {
+    const { feed } = this.props;
     const { navigate } = this.props.navigation;
+    console.log(feed);
     return (
       <HomeScreen
         {...this.state}
         navigate={navigate}
         onRefresh={this._refreshFeed}
+        photoList={feed}
       />
     );
   }
