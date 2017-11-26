@@ -93,6 +93,46 @@ function facebookLogin() {
   };
 }
 
+function getNotifications() {
+  return (dispatch, getState) => {
+    const { user: { token } } = getState();
+    fetch(`${API_URL}/notifications/`, {
+      headers: {
+        Authorization: `JWT ${token}`
+      }
+    })
+      .then(response => {
+        if (response.status === 401) {
+          dispatch(userActions.logout());
+        }
+        return response.json();
+      })
+      .then(json => {
+        console.log(json);
+      });
+  };
+}
+
+function getUserProfile(username) {
+  return (dispatch, getState) => {
+    const { user: { token } } = getState();
+    fetch(`${API_URL}/users/${username}/`, {
+      headers: {
+        Authorization: `JWT ${token}`
+      }
+    })
+      .then(response => {
+        if (response.status === 401) {
+          dispatch(userActions.logout());
+        }
+        return response.json();
+      })
+      .then(json => {
+        console.log(json);
+      });
+  };
+}
+
 // initial State
 
 const initialState = {
@@ -142,7 +182,9 @@ function applySetUser(state, action) {
 const actionCreators = {
   login,
   logout,
-  facebookLogin
+  facebookLogin,
+  getNotifications,
+  getUserProfile
 };
 
 export { actionCreators };

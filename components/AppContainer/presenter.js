@@ -1,23 +1,40 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { View, Text, StyleSheet } from "react-native";
 import LoggedOutNavigation from "../../navigation/LoggedOutNavigation";
 import RootNavigation from "../../navigation/RootNavigation";
 
-const AppContainer = props => (
-  <View style={styles.container}>
-    {props.isLoggedIn && props.username ? (
-      <RootNavigation screenProps={{ username: props.username }} />
-    ) : (
-      <LoggedOutNavigation />
-    )}
-  </View>
-);
+class AppContainer extends Component {
+  static propTypes = {
+    isLoggedIn: PropTypes.bool.isRequired,
+    username: PropTypes.string
+  };
+  componentWillReceiveProps = nextProps => {
+    const { initApp } = this.props;
+    if (nextProps.isLoggedIn && nextProps.username) {
+      initApp(nextProps.username);
+    }
+  };
+  componentDidMount() {
+    const { isLoggedIn, username, initApp } = this.props;
+    if (isLoggedIn && username) {
+      initApp(username);
+    }
+  }
 
-AppContainer.propTypes = {
-  isLoggedIn: PropTypes.bool.isRequired,
-  username: PropTypes.string
-};
+  render() {
+    const { isLoggedIn, username } = this.props;
+    return (
+      <View style={styles.container}>
+        {isLoggedIn && username ? (
+          <RootNavigation screenProps={{ username: username }} />
+        ) : (
+          <LoggedOutNavigation />
+        )}
+      </View>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
