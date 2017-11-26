@@ -2,9 +2,19 @@
 
 import { API_URL } from "../../constants";
 import { actionCreators as userActions } from "./user";
+
 // Actions
 
+const ADD_FEED_PHOTO = "ADD_FEED_PHOTO";
+
 // Action Creators
+
+function addFeedPhoto(photo) {
+  return {
+    type: ADD_FEED_PHOTO,
+    photo
+  };
+}
 
 // API Actions
 
@@ -23,7 +33,7 @@ function getFeed() {
         return response.json();
       })
       .then(json => {
-        console.log(json);
+        json.forEach(photo => dispatch(addFeedPhoto(photo)));
       });
   };
 }
@@ -56,12 +66,22 @@ const initialState = {};
 
 function reducer(state = initialState, action) {
   switch (action.type) {
+    case ADD_FEED_PHOTO:
+      return applySetAddFeedPhoto(state, action);
     default:
       return state;
   }
 }
 
 // Reducer Functions
+
+function applySetAddFeedPhoto(state, action) {
+  const { photo } = action;
+  return {
+    ...photo,
+    location: "feed"
+  };
+}
 
 // Exports
 

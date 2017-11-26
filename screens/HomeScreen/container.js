@@ -1,28 +1,31 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Text, Image } from "react-native";
 import HomeScreen from "./presenter";
-import NavButton from "../../components/NavButton";
 
 class Container extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    headerTitle: (
-      <Image
-        source={require("../../assets/images/logo.png")}
-        style={{ height: 35 }}
-        resizeMode="contain"
-      />
-    ),
-    headerLeft: (
-      <NavButton
-        iconName="ios-camera-outline"
-        onPress={() => navigation.navigate("AddPhotoModal")}
-      />
-    )
-  });
+  state = {
+    isFetching: true
+  };
+  static propTypes = {
+    getFeed: PropTypes.func.isRequired
+  };
+  _refreshFeed = () => {
+    const { getFeed } = this.props;
+    this.setState({
+      isFetching: true
+    });
+    getFeed();
+  };
   render() {
     const { navigate } = this.props.navigation;
-    return <HomeScreen navigate={navigate} />;
+
+    return (
+      <HomeScreen
+        navigate={navigate}
+        {...this.state}
+        onRefresh={this._refreshFeed}
+      />
+    );
   }
 }
 

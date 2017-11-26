@@ -4,6 +4,7 @@ import storage from "redux-persist/es/storage";
 import thunk from "redux-thunk";
 import user from "./modules/user";
 import ui from "./modules/ui";
+import photos from "./modules/photos";
 
 const middlewares = [thunk];
 
@@ -15,6 +16,7 @@ const persistConfig = {
 
 const reducer = persistCombineReducers(persistConfig, {
   user,
+  photos,
   ui
 });
 

@@ -1,10 +1,17 @@
 import React from "react";
-import { Text, TouchableHighlight } from "react-native";
+import { Text, ScrollView, RefreshControl } from "react-native";
 
 const HomeScreen = props => (
-  <TouchableHighlight onPress={() => props.navigate("Likes")}>
-    <Text>Home!</Text>
-  </TouchableHighlight>
+  <ScrollView>
+    <RefreshControl
+      refreshing={props.isFetching}
+      onRefresh={props.onRefresh}
+      tintColor={"black"}
+      title={"Refresh"}
+      titleColor={"black"}
+      colors={"black"}
+    />
+  </ScrollView>
 );
 
 export default HomeScreen;
