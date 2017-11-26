@@ -6,12 +6,17 @@ import RootNavigation from "../../navigation/RootNavigation";
 
 const AppContainer = props => (
   <View style={styles.container}>
-    {props.isLoggedIn ? <RootNavigation /> : <LoggedOutNavigation />}
+    {props.isLoggedIn && props.username ? (
+      <RootNavigation screenProps={{ username: props.username }} />
+    ) : (
+      <LoggedOutNavigation />
+    )}
   </View>
 );
 
 AppContainer.propTypes = {
-  isLoggedIn: PropTypes.bool.isRequired
+  isLoggedIn: PropTypes.bool.isRequired,
+  username: PropTypes.string
 };
 
 const styles = StyleSheet.create({

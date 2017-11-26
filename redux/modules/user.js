@@ -6,6 +6,7 @@ import { Alert } from "react-native";
 // actions
 const LOG_IN = "LOG_IN";
 const LOG_OUT = "LOG_OUT";
+const SET_USER = "SET_USER";
 // action creators
 
 function setLogIn(token) {
@@ -18,6 +19,13 @@ function setLogIn(token) {
 function logout() {
   return {
     type: LOG_OUT
+  };
+}
+
+function setUser(user) {
+  return {
+    type: SET_USER,
+    user
   };
 }
 
@@ -39,8 +47,9 @@ function login(username, password) {
       .then(response => response.json())
       .then(json => {
         if (json.token) {
-          dispatch(userActions.unsetFetching());
           dispatch(setLogIn(json.token));
+          dispatch(setUser(json.user));
+          dispatch(userActions.unsetFetching());
         } else {
           Alert.alert("Something went wrong, try again");
           dispatch(userActions.unsetFetching());
@@ -72,6 +81,7 @@ function facebookLogin() {
         .then(json => {
           if (json.token) {
             dispatch(setLogIn(json.token));
+            dispatch(setUser(json.user));
             dispatch(userActions.unsetFetching());
           } else {
             Alert.alert("Something went wrong, try again");
@@ -97,6 +107,8 @@ function reducer(state = initialState, action) {
       return applySetLogIn(state, action);
     case LOG_OUT:
       return applyLogOut();
+    case SET_USER:
+      return applySetUser(state, action);
     default:
       return state;
   }
@@ -114,6 +126,14 @@ function applyLogOut(state, action) {
     ...state,
     isLoggedIn: false,
     token: ""
+  };
+}
+
+function applySetUser(state, action) {
+  const { user } = action;
+  return {
+    ...state,
+    ...user
   };
 }
 

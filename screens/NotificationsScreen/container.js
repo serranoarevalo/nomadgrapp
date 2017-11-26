@@ -5,13 +5,7 @@ import NotificationsScreen from "./presenter";
 
 class Container extends Component {
   static navigationOptions = {
-    tabBarIcon: ({ focused }) => {
-      if (focused) {
-        return <Ionicons name="ios-heart" size={30} color={"black"} />;
-      } else {
-        return <Ionicons name="ios-heart-outline" size={30} color={"black"} />;
-      }
-    }
+    header: null
   };
   render() {
     return <NotificationsScreen />;
