@@ -107,9 +107,7 @@ function getNotifications() {
         }
         return response.json();
       })
-      .then(json => {
-        console.log(json);
-      });
+      .then(json => {});
   };
 }
 
@@ -127,9 +125,7 @@ function getUserProfile(username) {
         }
         return response.json();
       })
-      .then(json => {
-        console.log(json);
-      });
+      .then(json => {});
   };
 }
 
