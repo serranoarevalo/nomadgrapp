@@ -57,7 +57,7 @@ const TabsNavigation = TabNavigator(
           {...props}
           jumpToIndex={index => {
               if (index === 2) {
-                  navigation.navigate('AddPhoto')
+                  navigation.navigate('AddPhotoModal')
               }
               else {
                   jumpToIndex(index)

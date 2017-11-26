@@ -1,5 +1,5 @@
 import { StackNavigator } from "react-navigation";
-import AddPhotoScreen from "../screens/ProfileScreen";
+import AddPhotoScreen from "../screens/AddPhotoScreen";
 import TabsNavigation from "./TabsNavigation";
 
 const RootNavigator = StackNavigator(
@@ -7,7 +7,7 @@ const RootNavigator = StackNavigator(
     MainTabNavigator: {
       screen: TabsNavigation
     },
-    AddPhoto: {
+    AddPhotoModal: {
       screen: AddPhotoScreen,
       navigationOptions: {
         gesturesEnabled: true
