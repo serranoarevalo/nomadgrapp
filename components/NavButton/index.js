@@ -18,7 +18,8 @@ NavButton.propTypes = {
 
 const styles = StyleSheet.create({
   container: {
-    paddingLeft: 10
+    paddingLeft: 10,
+    paddingRight: 10
   }
 });
 

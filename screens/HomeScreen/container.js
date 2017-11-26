@@ -5,7 +5,7 @@ import HomeScreen from "./presenter";
 import NavButton from "../../components/NavButton";
 
 class Container extends Component {
-  static navigationOptions = {
+  static navigationOptions = ({ navigation }) => ({
     headerTitle: (
       <Image
         source={require("../../assets/images/logo.png")}
@@ -13,8 +13,13 @@ class Container extends Component {
         resizeMode="contain"
       />
     ),
-    headerLeft: <NavButton iconName="ios-camera-outline" />
-  };
+    headerLeft: (
+      <NavButton
+        iconName="ios-camera-outline"
+        onPress={() => navigation.navigate("AddPhotoModal")}
+      />
+    )
+  });
   render() {
     const { navigate } = this.props.navigation;
     return <HomeScreen navigate={navigate} />;
