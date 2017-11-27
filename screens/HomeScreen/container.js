@@ -24,7 +24,8 @@ class Container extends Component {
     isFetching: true
   };
   static propTypes = {
-    getFeed: PropTypes.func.isRequired
+    getFeed: PropTypes.func.isRequired,
+    feed: PropTypes.array
   };
   _refreshFeed = () => {
     const { getFeed } = this.props;

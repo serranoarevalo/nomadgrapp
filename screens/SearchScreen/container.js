@@ -5,7 +5,15 @@ import SearchScreen from "./presenter";
 
 class Container extends Component {
   static navigationOptions = {
-    header: null
+    headerTitle: "Search",
+    headerStyle: {
+      backgroundColor: "#FAFAFA",
+      borderBottomWidth: 0
+    }
+  };
+  static propTypes = {
+    photoList: PropTypes.array,
+    searchPhotos: PropTypes.func.isRequired
   };
   state = {
     isFetching: true,
@@ -43,15 +51,20 @@ class Container extends Component {
     const { searchingBy } = this.state;
     searchPhotos(searchingBy);
   };
+  _onPhotoPress = () => {
+    const { navigation: { navigate } } = this.props;
+    navigate("Likes");
+  };
   render() {
-    const { navigate } = this.props.navigation;
+    const { photoList } = this.props;
     return (
       <SearchScreen
-        navigate={navigate}
         {...this.state}
         submitSearch={this._submitSearch}
         onInputChange={this._handleInputChange}
         onRefresh={this._handleRefresh}
+        photoList={photoList}
+        onPhotoPress={this._onPhotoPress}
       />
     );
   }

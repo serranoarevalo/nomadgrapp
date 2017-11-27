@@ -27,11 +27,13 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     paddingLeft: 10,
     paddingRight: 10,
-    height: 63
+    height: 45,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: "rgba(0, 0, 0, .3)"
   },
   searchBar: {
     height: 30,
-    marginBottom: 5,
+    marginBottom: 10,
     borderRadius: 4,
     backgroundColor: "#EDEDEF",
     padding: 5

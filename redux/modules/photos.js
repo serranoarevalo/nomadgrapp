@@ -94,7 +94,9 @@ function searchByTerm(searchTerm) {
         }
         return response.json();
       })
-      .then(json => dispatch(setSearch(json)));
+      .then(json => {
+        dispatch(setSearch(json));
+      });
   };
 }
 

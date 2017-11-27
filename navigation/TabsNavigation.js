@@ -69,7 +69,7 @@ const TabsNavigation = TabNavigator(
     tabBarOptions: {
       showLabel: false,
       style: {
-        backgroundColor: "#FAFAFA",
+        backgroundColor: "#F7F7F7",
         height: 45
       }
     }
