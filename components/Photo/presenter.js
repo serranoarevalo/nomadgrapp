@@ -1,6 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { View, Text, Image, StyleSheet, Dimensions } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  Dimensions,
+  TouchableOpacity
+} from "react-native";
 import FadeIn from "react-native-fade-in-image";
 import FitImage from "react-native-fit-image";
 import { API_URL } from "../../constants";
@@ -35,6 +42,25 @@ const Photo = props => (
         photoId={props.id}
         likeCount={props.like_count}
       />
+      <View style={styles.comment}>
+        <Text style={styles.author}>
+          {props.creator.username}{" "}
+          <Text style={styles.message}>{props.caption}</Text>
+        </Text>
+      </View>
+      {props.comments.length > 0 && (
+        <View style={styles.commentsLink}>
+          <TouchableOpacity>
+            {props.comments.length === 1 ? (
+              <Text style={styles.linkText}>View 1 comment</Text>
+            ) : (
+              <Text style={styles.linkText}>
+                View all {props.comments.length} comments
+              </Text>
+            )}
+          </TouchableOpacity>
+        </View>
+      )}
     </View>
   </View>
 );
@@ -69,6 +95,26 @@ const styles = StyleSheet.create({
   photoMeta: {
     paddingLeft: 15,
     paddingRight: 15
+  },
+  comment: {
+    marginTop: 5,
+    flexDirection: "row"
+  },
+  author: {
+    marginRight: 5,
+    fontWeight: "600",
+    fontSize: 14
+  },
+  message: {
+    fontSize: 15,
+    fontWeight: "400"
+  },
+  commentsLink: {
+    marginTop: 5
+  },
+  linkText: {
+    fontSize: 14,
+    color: "#999"
   }
 });
 
