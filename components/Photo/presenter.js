@@ -30,7 +30,11 @@ const Photo = props => (
       originalHeight={props.is_vertical ? 600 : 300}
     />
     <View style={styles.photoMeta}>
-      <PhotoActions isLiked={props.is_liked} photoId={props.id} />
+      <PhotoActions
+        isLiked={props.is_liked}
+        photoId={props.id}
+        likeCount={props.like_count}
+      />
     </View>
   </View>
 );
