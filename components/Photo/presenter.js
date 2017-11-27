@@ -2,10 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import { View, Text, Image, StyleSheet, Dimensions } from "react-native";
 import FadeIn from "react-native-fade-in-image";
-import { API_URL } from "../../constants";
-const width = Dimensions.get("window").width;
-import ImageLoading from "../ImageLoading";
 import FitImage from "react-native-fit-image";
+import { API_URL } from "../../constants";
+import PhotoActions from "../PhotoActions";
+
+const width = Dimensions.get("window").width;
 
 const Photo = props => (
   <View style={styles.photo}>
@@ -28,6 +29,9 @@ const Photo = props => (
       originalWidth={width}
       originalHeight={props.is_vertical ? 600 : 300}
     />
+    <View style={styles.photoMeta}>
+      <PhotoActions isLiked={props.is_liked} photoId={props.id} />
+    </View>
   </View>
 );
 
@@ -57,6 +61,10 @@ const styles = StyleSheet.create({
   },
   location: {
     fontSize: 12
+  },
+  photoMeta: {
+    paddingLeft: 15,
+    paddingRight: 15
   }
 });
 
