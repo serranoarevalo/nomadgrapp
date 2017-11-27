@@ -14,11 +14,6 @@ import SquarePhoto from "../../components/SquarePhoto";
 
 const SearchScreen = props => (
   <View style={styles.container}>
-    <SearchBar
-      value={props.inputText}
-      onChangeText={props.onInputChange}
-      onEndEditing={props.submitSearch}
-    />
     <ScrollView
       refreshControl={
         <RefreshControl

@@ -9,7 +9,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    searchPhotos: term => {
+    searchPhotos: (term = "") => {
       if (term.length === 0) {
         dispatch(photoActions.getSearch());
       } else {

@@ -2,14 +2,14 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Ionicons } from "@expo/vector-icons";
 import SearchScreen from "./presenter";
+import SearchBar from "../../components/SearchBar";
 
 class Container extends Component {
-  static navigationOptions = {
-    headerTitle: "Search",
-    headerStyle: {
-      backgroundColor: "#FAFAFA",
-      borderBottomWidth: 0
-    }
+  static navigationOptions = ({ navigation, screenProps }) => {
+    const { params = {} } = navigation.state;
+    return {
+      headerTitle: <SearchBar submit={text => params.submitSearch(text)} />
+    };
   };
   static propTypes = {
     photoList: PropTypes.array,
@@ -21,12 +21,16 @@ class Container extends Component {
     searchingBy: ""
   };
   componentDidMount() {
-    const { photoList } = this.props;
+    const { photoList, navigation } = this.props;
+    const { inputText } = this.state;
     if (photoList) {
       this.setState({
         isFetching: false
       });
     }
+    navigation.setParams({
+      submitSearch: this._submitSearch
+    });
   }
   componentWillReceiveProps = nextProps => {
     if (nextProps.photoList) {
@@ -35,12 +39,12 @@ class Container extends Component {
       });
     }
   };
-  _submitSearch = () => {
-    const { inputText, searchingBy } = this.state;
+  _submitSearch = text => {
+    const { searchingBy } = this.state;
     const { searchPhotos } = this.props;
-    searchPhotos(inputText);
+    searchPhotos(text);
     this.setState({
-      searchingBy: inputText
+      searchingBy: text
     });
   };
   _handleInputChange = text => {
