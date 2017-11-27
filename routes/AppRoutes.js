@@ -10,7 +10,10 @@ const AppRoutes = {
 
 const options = {
   navigationOptions: {
-    headerLeft: props => <NavButton iconName="ios-arrow-back" {...props} />
+    headerLeft: props => <NavButton iconName="ios-arrow-back" {...props} />,
+    headerStyle: {
+      backgroundColor: "#FAFAFA"
+    }
   }
 };
 

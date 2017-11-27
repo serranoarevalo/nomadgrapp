@@ -8,6 +8,7 @@ import { actionCreators as userActions } from "./user";
 const ADD_FEED = "ADD_FEED";
 const LIKE_PHOTO = "LIKE_PHOTO";
 const UNLIKE_PHOTO = "UNLIKE_PHOTO";
+const SET_SEARCH = "SET_SEARCH";
 
 // Action Creators
 
@@ -29,6 +30,13 @@ function doUnlikePhoto(photoId) {
   return {
     type: UNLIKE_PHOTO,
     photoId
+  };
+}
+
+function setSearch(photos) {
+  return {
+    type: SET_SEARCH,
+    photos
   };
 }
 
@@ -68,7 +76,25 @@ function getSearch() {
         }
         return response.json();
       })
-      .then(json => {});
+      .then(json => dispatch(setSearch(json)));
+  };
+}
+
+function searchByTerm(searchTerm) {
+  return (dispatch, getState) => {
+    const { user: { token } } = getState();
+    fetch(`${API_URL}/images/search/?hashtags=${searchTerm}`, {
+      headers: {
+        Authorization: `JWT ${token}`
+      }
+    })
+      .then(response => {
+        if (response.status === 401) {
+          dispatch(userActions.logout());
+        }
+        return response.json();
+      })
+      .then(json => dispatch(setSearch(json)));
   };
 }
 
@@ -124,6 +150,8 @@ function reducer(state = initialState, action) {
       return applyLikePhoto(state, action);
     case UNLIKE_PHOTO:
       return applyUnlikePhoto(state, action);
+    case SET_SEARCH:
+      return applySetSearch(state, action);
     default:
       return state;
   }
@@ -150,6 +178,7 @@ function applyLikePhoto(state, action) {
   });
   return { ...state, feed: updatedFeed };
 }
+
 function applyUnlikePhoto(state, action) {
   const { photoId } = action;
   const { feed } = state;
@@ -162,13 +191,22 @@ function applyUnlikePhoto(state, action) {
   return { ...state, feed: updatedFeed };
 }
 
+function applySetSearch(state, action) {
+  const { photos } = action;
+  return {
+    ...state,
+    searchPhotos: photos
+  };
+}
+
 // Exports
 
 const actionCreators = {
   getFeed,
   getSearch,
   likePhoto,
-  unlikePhoto
+  unlikePhoto,
+  searchByTerm
 };
 
 export { actionCreators };
