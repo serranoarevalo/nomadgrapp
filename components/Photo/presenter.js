@@ -89,7 +89,9 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     paddingBottom: 10,
     alignItems: "center",
-    flex: 1
+    flex: 1,
+    borderBottomColor: "#bbb",
+    borderBottomWidth: StyleSheet.hairlineWidth
   },
   avatar: {
     width: 30,

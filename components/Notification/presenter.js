@@ -17,7 +17,7 @@ const Notification = props => (
     >
       <FadeIn>
         <Image
-          source={{ uri: API_URL + props.creator.profile_image }}
+          source={{ uri: props.creator.profile_image }}
           style={styles.avatar}
         />
       </FadeIn>

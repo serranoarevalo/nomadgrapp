@@ -7,7 +7,6 @@ class Container extends Component {
   constructor(props) {
     super(props);
     const { navigation: { state: { params } } } = props;
-    console.log(params);
     this.state = {
       isFetching: true,
       profile: {
