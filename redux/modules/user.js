@@ -1,6 +1,6 @@
 // imports
 import { API_URL, FB_APP_ID } from "../../constants";
-import { actionCreators as userActions } from "./ui";
+import { actionCreators as uiActions } from "./ui";
 import { Facebook } from "expo";
 import { Alert } from "react-native";
 // actions
@@ -41,7 +41,7 @@ function setSetNotifications(notifications) {
 
 function login(username, password) {
   return dispatch => {
-    dispatch(userActions.setFetching());
+    dispatch(uiActions.setFetching());
     fetch(`${API_URL}/rest-auth/login/`, {
       method: "POST",
       headers: {
@@ -57,10 +57,10 @@ function login(username, password) {
         if (json.token) {
           dispatch(setLogIn(json.token));
           dispatch(setUser(json.user));
-          dispatch(userActions.unsetFetching());
+          dispatch(uiActions.unsetFetching());
         } else {
           Alert.alert("Something went wrong, try again");
-          dispatch(userActions.unsetFetching());
+          dispatch(uiActions.unsetFetching());
         }
       });
   };
@@ -68,7 +68,7 @@ function login(username, password) {
 
 function facebookLogin() {
   return async dispatch => {
-    dispatch(userActions.setFetching());
+    dispatch(uiActions.setFetching());
     const { type, token } = await Facebook.logInWithReadPermissionsAsync(
       FB_APP_ID,
       {
@@ -90,10 +90,10 @@ function facebookLogin() {
           if (json.token) {
             dispatch(setLogIn(json.token));
             dispatch(setUser(json.user));
-            dispatch(userActions.unsetFetching());
+            dispatch(uiActions.unsetFetching());
           } else {
             Alert.alert("Something went wrong, try again");
-            dispatch(userActions.unsetFetching());
+            dispatch(uiActions.unsetFetching());
           }
         })
         .catch(err => console.log(err));
@@ -111,7 +111,7 @@ function getNotifications() {
     })
       .then(response => {
         if (response.status === 401) {
-          dispatch(userActions.logout());
+          dispatch(logout());
         }
         return response.json();
       })
@@ -129,11 +129,53 @@ function getUserProfile(username) {
     })
       .then(response => {
         if (response.status === 401) {
-          dispatch(userActions.logout());
+          dispatch(logout());
         }
         return response.json();
       })
       .then(json => {});
+  };
+}
+
+function followUser(userId) {
+  return (dispatch, getState) => {
+    const { user: { token } } = getState();
+    return fetch(`${API_URL}/users/${userId}/follow/`, {
+      method: "POST",
+      headers: {
+        Authorization: `JWT ${token}`,
+        "Content-Type": "application/json"
+      }
+    }).then(response => {
+      if (response.status === 401) {
+        dispatch(logout());
+      } else if (response.ok) {
+        return "ok";
+      } else if (!response.ok) {
+        return false;
+      }
+    });
+  };
+}
+
+function unfollowUser(userId) {
+  return (dispatch, getState) => {
+    const { user: { token } } = getState();
+    return fetch(`${API_URL}/users/${userId}/unfollow/`, {
+      method: "POST",
+      headers: {
+        Authorization: `JWT ${token}`,
+        "Content-Type": "application/json"
+      }
+    }).then(response => {
+      if (response.status === 401) {
+        dispatch(logout());
+      } else if (response.ok) {
+        return "ok";
+      } else if (!response.ok) {
+        return false;
+      }
+    });
   };
 }
 
@@ -195,7 +237,9 @@ const actionCreators = {
   logout,
   facebookLogin,
   getNotifications,
-  getUserProfile
+  getUserProfile,
+  followUser,
+  unfollowUser
 };
 
 export { actionCreators };

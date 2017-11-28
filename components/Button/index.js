@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import { View, Text, TouchableHighlight, StyleSheet } from "react-native";
 
 const Button = props => (
-  <TouchableHighlight onPress={props.onPress}>
-    <View style={style.button}>
-      <Text style={style.text}>{props.text}</Text>
+  <TouchableHighlight onPressOut={props.onPress} style={styles.touchable}>
+    <View style={styles.button}>
+      <Text style={styles.text}>{props.text}</Text>
     </View>
   </TouchableHighlight>
 );
@@ -15,7 +15,10 @@ Button.propTypes = {
   text: PropTypes.string.isRequired
 };
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
+  touchable: {
+    borderRadius: 3
+  },
   button: {
     borderRadius: 3,
     backgroundColor: "#3E99EE",
