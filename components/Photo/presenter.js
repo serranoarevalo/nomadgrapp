@@ -12,25 +12,34 @@ import FadeIn from "react-native-fade-in-image";
 import FitImage from "react-native-fit-image";
 import { API_URL } from "../../constants";
 import PhotoActions from "../PhotoActions";
+import { withNavigation } from "react-navigation";
 
 const width = Dimensions.get("window").width;
 
 const Photo = props => (
   <View style={styles.photo}>
-    <View style={styles.header}>
-      <FadeIn>
-        <Image
-          source={{ uri: props.creator.profile_image }}
-          style={styles.avatar}
-        />
-      </FadeIn>
-      <View>
-        <Text style={styles.author}>{props.creator.username}</Text>
-        {props.location && (
-          <Text style={styles.location}>{props.location}</Text>
-        )}
+    <TouchableOpacity
+      onPress={() =>
+        props.navigation.navigate("ProfileDetail", {
+          name: props.creator.username
+        })
+      }
+    >
+      <View style={styles.header}>
+        <FadeIn>
+          <Image
+            source={{ uri: props.creator.profile_image }}
+            style={styles.avatar}
+          />
+        </FadeIn>
+        <View>
+          <Text style={styles.author}>{props.creator.username}</Text>
+          {props.location && (
+            <Text style={styles.location}>{props.location}</Text>
+          )}
+        </View>
       </View>
-    </View>
+    </TouchableOpacity>
     <FitImage
       source={{ uri: props.file }}
       originalWidth={width}
@@ -51,7 +60,9 @@ const Photo = props => (
       </View>
       {props.comments.length > 0 && (
         <View style={styles.commentsLink}>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => props.navigation.navigate("Comments")}
+          >
             {props.comments.length === 1 ? (
               <Text style={styles.linkText}>View 1 comment</Text>
             ) : (
@@ -153,4 +164,4 @@ Photo.propTypes = {
   likeCount: PropTypes.number.isRequired
 };
 
-export default Photo;
+export default withNavigation(Photo);

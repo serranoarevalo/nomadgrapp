@@ -29,11 +29,7 @@ const SearchScreen = props => (
       ) : (
         <View style={styles.photosContainer}>
           {props.photoList.map(photo => (
-            <SquarePhoto
-              key={photo.id}
-              onPress={props.onPhotoPress}
-              imageUrl={photo.file}
-            />
+            <SquarePhoto key={photo.id} imageUrl={photo.file} />
           ))}
         </View>
       )}
@@ -47,8 +43,7 @@ SearchScreen.propTypes = {
   onInputChange: PropTypes.func.isRequired,
   searchingBy: PropTypes.string.isRequired,
   onRefresh: PropTypes.func.isRequired,
-  photoList: PropTypes.array,
-  onPhotoPress: PropTypes.func.isRequired
+  photoList: PropTypes.array
 };
 
 const styles = StyleSheet.create({

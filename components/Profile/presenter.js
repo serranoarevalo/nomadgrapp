@@ -88,11 +88,11 @@ const Profile = props => (
           </TouchableOpacity>
         </View>
 
-        <View style={styles.photoContainer}>
-          {props.mode === "list" &&
-            props.images &&
-            props.images.map(photo => <Photo {...photo} key={photo.id} />)}
+        {props.mode === "list" &&
+          props.images &&
+          props.images.map(photo => <Photo {...photo} key={photo.id} />)}
 
+        <View style={styles.photoContainer}>
           {props.mode === "grid" &&
             props.images &&
             props.images.map(photo => (

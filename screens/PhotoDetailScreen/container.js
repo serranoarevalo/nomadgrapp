@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import CommentsScreen from "./presenter";
+import Photo from "../../components/Photo";
 
 class Container extends Component {
   static navigationOptions = {
-    headerTitle: "Comments"
+    headerTitle: "Photo"
   };
   render() {
-    return <CommentsScreen {...this.props} />;
+    return null;
   }
 }
 

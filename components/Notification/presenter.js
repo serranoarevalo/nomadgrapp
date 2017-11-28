@@ -4,91 +4,59 @@ import { View, Text, Image, StyleSheet } from "react-native";
 import { API_URL } from "../../constants";
 import FadeIn from "react-native-fade-in-image";
 import Button from "../Button";
+import { withNavigation } from "react-navigation";
 
-class Notification extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      following: props.creator.following
-    };
-  }
+const Notification = props => (
+  <View style={styles.container}>
+    <FadeIn>
+      <Image
+        source={{ uri: API_URL + props.creator.profile_image }}
+        style={styles.avatar}
+      />
+    </FadeIn>
+    <Text style={styles.centerText}>
+      <Text style={styles.username}>{props.creator.username}</Text>{" "}
+      {props.notification_type === "comment" && `commented: ${props.comment}`}
+      {props.notification_type === "like" && `liked your post`}
+      {props.notification_type === "follow" && `started following you`}
+    </Text>
+    {props.notification_type === "follow" ? (
+      <Button
+        text={props.following ? "Unfollow" : "Follow"}
+        onPress={props.handleFollowClick}
+        backgroundColor="#3e99ee"
+        textColor="white"
+        borderColor="#3e99ee"
+      />
+    ) : (
+      <FadeIn>
+        <Image
+          source={{ uri: API_URL + props.image.file }}
+          style={styles.payload}
+        />
+      </FadeIn>
+    )}
+  </View>
+);
 
-  static propTypes = {
-    comment: PropTypes.string,
-    created_at: PropTypes.string.isRequired,
-    creator: PropTypes.shape({
-      following: PropTypes.bool.isRequired,
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      profile_image: PropTypes.string,
-      username: PropTypes.string.isRequired
-    }).isRequired,
+Notification.propTypes = {
+  comment: PropTypes.string,
+  created_at: PropTypes.string.isRequired,
+  creator: PropTypes.shape({
+    following: PropTypes.bool.isRequired,
     id: PropTypes.number.isRequired,
-    image: PropTypes.shape({
-      file: PropTypes.string.isRequired
-    }),
-    notification_type: PropTypes.oneOf(["like", "follow", "comment"])
-      .isRequired,
-    to: PropTypes.number.isRequired,
-    updated_at: PropTypes.string.isRequired
-  };
-  _handleFollowClick = async () => {
-    const { followUser, unfollowUser } = this.props;
-    const { following } = this.state;
-    let action;
-    if (following) {
-      action = await unfollowUser();
-      if (action === "ok") {
-        this.setState({
-          following: false
-        });
-      }
-    } else {
-      action = await followUser();
-      if (action === "ok") {
-        this.setState({
-          following: true
-        });
-      }
-    }
-  };
-  render() {
-    const { following } = this.state;
-    const { creator, notification_type, image, comment } = this.props;
-    return (
-      <View style={styles.container}>
-        <FadeIn>
-          <Image
-            source={{ uri: API_URL + creator.profile_image }}
-            style={styles.avatar}
-          />
-        </FadeIn>
-        <Text style={styles.centerText}>
-          <Text style={styles.username}>{creator.username}</Text>{" "}
-          {notification_type === "comment" && `commented: ${comment}`}
-          {notification_type === "like" && `liked your post`}
-          {notification_type === "follow" && `started following you`}
-        </Text>
-        {notification_type === "follow" ? (
-          <Button
-            text={following ? "Unfollow" : "Follow"}
-            onPress={this._handleFollowClick}
-            backgroundColor="#3e99ee"
-            textColor="white"
-            borderColor="#3e99ee"
-          />
-        ) : (
-          <FadeIn>
-            <Image
-              source={{ uri: API_URL + image.file }}
-              style={styles.payload}
-            />
-          </FadeIn>
-        )}
-      </View>
-    );
-  }
-}
+    name: PropTypes.string.isRequired,
+    profile_image: PropTypes.string,
+    username: PropTypes.string.isRequired
+  }).isRequired,
+  id: PropTypes.number.isRequired,
+  image: PropTypes.shape({
+    file: PropTypes.string.isRequired
+  }),
+  notification_type: PropTypes.oneOf(["like", "follow", "comment"]).isRequired,
+  to: PropTypes.number.isRequired,
+  updated_at: PropTypes.string.isRequired
+};
 
 const styles = StyleSheet.create({
   container: {

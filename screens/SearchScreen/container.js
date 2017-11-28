@@ -61,10 +61,6 @@ class Container extends Component {
     const { searchingBy } = this.state;
     searchPhotos(searchingBy);
   };
-  _onPhotoPress = () => {
-    const { navigation: { navigate } } = this.props;
-    navigate("Likes");
-  };
   render() {
     const { photoList } = this.props;
     return (
@@ -74,7 +70,6 @@ class Container extends Component {
         onInputChange={this._handleInputChange}
         onRefresh={this._handleRefresh}
         photoList={photoList}
-        onPhotoPress={this._onPhotoPress}
       />
     );
   }

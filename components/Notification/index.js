@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { actionCreators as userActions } from "../../redux/modules/user";
-import Notification from "./presenter";
+import Container from "./container";
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   const { creator: { id } } = ownProps;
@@ -14,4 +14,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(Notification);
+export default connect(null, mapDispatchToProps)(Container);

@@ -12,16 +12,16 @@ import FadeIn from "react-native-fade-in-image";
 import FitImage from "react-native-fit-image";
 const width = Dimensions.get("window").width;
 import { API_URL } from "../../constants";
+import { withNavigation } from "react-navigation";
 
 const SquarePhoto = props => (
-  <TouchableOpacity onPress={props.onPress}>
+  <TouchableOpacity onPress={() => props.navigation.navigate("PhotoDetail")}>
     <FitImage source={{ uri: props.imageUrl }} style={styles.image} />
   </TouchableOpacity>
 );
 
 SquarePhoto.propTypes = {
-  imageUrl: PropTypes.string.isRequired,
-  onPress: PropTypes.func.isRequired
+  imageUrl: PropTypes.string.isRequired
 };
 
 const styles = StyleSheet.create({
@@ -31,4 +31,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default SquarePhoto;
+export default withNavigation(SquarePhoto);

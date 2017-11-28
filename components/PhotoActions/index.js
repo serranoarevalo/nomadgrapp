@@ -2,6 +2,7 @@ import React from "react";
 import { View, TouchableOpacity, StyleSheet, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import PropTypes from "prop-types";
+import { withNavigation } from "react-navigation";
 
 const PhotoActions = props => (
   <View style={styles.container}>
@@ -15,15 +16,19 @@ const PhotoActions = props => (
           />
         </View>
       </TouchableOpacity>
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPressOut={() => props.navigation.navigate("Comments")}
+      >
         <View style={styles.action}>
           <Ionicons name="ios-text-outline" size={30} color="black" />
         </View>
       </TouchableOpacity>
     </View>
-    <Text style={styles.likes}>
-      {props.likeCount} {props.likeCount === 1 ? "like" : "likes"}
-    </Text>
+    <TouchableOpacity onPress={() => props.navigation.navigate("Likes")}>
+      <Text style={styles.likes}>
+        {props.likeCount} {props.likeCount === 1 ? "like" : "likes"}
+      </Text>
+    </TouchableOpacity>
   </View>
 );
 
@@ -50,4 +55,4 @@ PhotoActions.propTypes = {
   handlePress: PropTypes.func.isRequired
 };
 
-export default PhotoActions;
+export default withNavigation(PhotoActions);
