@@ -9,7 +9,6 @@ class Container extends Component {
       following: props.creator.following
     };
   }
-
   static propTypes = {
     followUser: PropTypes.func.isRequired,
     unfollowUser: PropTypes.func.isRequired
@@ -38,6 +37,7 @@ class Container extends Component {
     return (
       <Notification
         {...this.props}
+        {...this.state}
         handleFollowClick={this._handleFollowClick}
       />
     );

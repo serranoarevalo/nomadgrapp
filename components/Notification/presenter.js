@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { API_URL } from "../../constants";
 import FadeIn from "react-native-fade-in-image";
 import Button from "../Button";
@@ -8,12 +8,20 @@ import { withNavigation } from "react-navigation";
 
 const Notification = props => (
   <View style={styles.container}>
-    <FadeIn>
-      <Image
-        source={{ uri: API_URL + props.creator.profile_image }}
-        style={styles.avatar}
-      />
-    </FadeIn>
+    <TouchableOpacity
+      onPress={() =>
+        props.navigation.navigate("ProfileDetail", {
+          name: props.creator.username
+        })
+      }
+    >
+      <FadeIn>
+        <Image
+          source={{ uri: API_URL + props.creator.profile_image }}
+          style={styles.avatar}
+        />
+      </FadeIn>
+    </TouchableOpacity>
     <Text style={styles.centerText}>
       <Text style={styles.username}>{props.creator.username}</Text>{" "}
       {props.notification_type === "comment" && `commented: ${props.comment}`}
@@ -55,7 +63,8 @@ Notification.propTypes = {
   }),
   notification_type: PropTypes.oneOf(["like", "follow", "comment"]).isRequired,
   to: PropTypes.number.isRequired,
-  updated_at: PropTypes.string.isRequired
+  updated_at: PropTypes.string.isRequired,
+  following: PropTypes.bool.isRequired
 };
 
 const styles = StyleSheet.create({
@@ -82,4 +91,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Notification;
+export default withNavigation(Notification);

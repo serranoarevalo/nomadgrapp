@@ -5,8 +5,16 @@ import { actionCreators as userActions } from "../../redux/modules/user";
 const mapStateToProps = (state, ownProps) => {
   const { user } = state;
   return {
-    user
+    profile: user.profile
   };
 };
 
-export default connect(mapStateToProps)(Container);
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    getUserProfile: username => {
+      dispatch(userActions.getUserProfile(username, true));
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Container);

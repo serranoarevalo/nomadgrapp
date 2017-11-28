@@ -7,30 +7,6 @@ class Container extends Component {
     isFetching: true,
     mode: "grid"
   };
-  componentDidMount() {
-    const { user, getUserProfile } = this.props;
-    if (user) {
-      this.setState({ isFetching: false });
-    } else {
-      this._getProfile();
-    }
-  }
-  componentWillReceiveProps = nextProps => {
-    if (nextProps.user) {
-      this.setState({
-        isFetching: false
-      });
-    }
-  };
-  _getProfile = () => {
-    const { getUserProfile } = this.props;
-    this.setState(
-      {
-        isFetching: true
-      },
-      getUserProfile()
-    );
-  };
   _handleButtonPress = () => {};
   _handleGridTap = () => {
     this.setState({ mode: "grid" });
@@ -43,8 +19,8 @@ class Container extends Component {
     return (
       <Profile
         {...this.state}
+        {...this.props}
         {...user}
-        getProfile={this._getProfile}
         handleButtonPress={this._handleButtonPress}
         handleGridTap={this._handleGridTap}
         handleListTap={this._handleListTap}

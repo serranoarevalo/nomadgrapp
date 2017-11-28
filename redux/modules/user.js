@@ -119,7 +119,7 @@ function getNotifications() {
   };
 }
 
-function getUserProfile(username) {
+function getUserProfile(username, persist = false) {
   return (dispatch, getState) => {
     const { user: { token } } = getState();
     fetch(`${API_URL}/users/${username}/`, {
@@ -133,7 +133,13 @@ function getUserProfile(username) {
         }
         return response.json();
       })
-      .then(json => dispatch(setUser(json)));
+      .then(json => {
+        if (persist) {
+          dispatch(setUser(json));
+        } else {
+          return "ok";
+        }
+      });
   };
 }
 
