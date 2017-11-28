@@ -33,7 +33,7 @@ class Container extends Component {
       {
         isFetching: true
       },
-      getUserProfile()
+      getUserProfile(profile.username)
     );
   };
   render() {

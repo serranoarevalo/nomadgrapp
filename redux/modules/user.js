@@ -122,7 +122,7 @@ function getNotifications() {
 function getUserProfile(username, persist = false) {
   return (dispatch, getState) => {
     const { user: { token } } = getState();
-    fetch(`${API_URL}/users/${username}/`, {
+    return fetch(`${API_URL}/users/${username}/`, {
       headers: {
         Authorization: `JWT ${token}`
       }
@@ -131,13 +131,16 @@ function getUserProfile(username, persist = false) {
         if (response.status === 401) {
           dispatch(logout());
         }
+        if (!response.ok) {
+          return false;
+        }
         return response.json();
       })
       .then(json => {
         if (persist) {
           dispatch(setUser(json));
         } else {
-          return "ok";
+          return json;
         }
       });
   };

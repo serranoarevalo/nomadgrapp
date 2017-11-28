@@ -21,7 +21,7 @@ const Photo = props => (
     <TouchableOpacity
       onPress={() =>
         props.navigation.navigate("ProfileDetail", {
-          name: props.creator.username
+          user: props.creator
         })
       }
     >

@@ -18,7 +18,7 @@ const AppRoutes = {
   ProfileDetail: {
     screen: ProfileDetailScreen,
     navigationOptions: ({ navigation }) => ({
-      title: `${navigation.state.params.name}`
+      title: `${navigation.state.params.user.username}`
     })
   }
 };

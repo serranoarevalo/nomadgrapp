@@ -56,7 +56,7 @@ const Profile = props => (
               backgroundColor={props.is_self ? "white" : "#3e99ee"}
               onPress={props.handleButtonPress}
               text={props.is_self ? "Edit Profile" : "Follow"}
-              borderColor="black"
+              borderColor={props.is_self ? "black" : "#3e99ee"}
             />
           </View>
         </View>
