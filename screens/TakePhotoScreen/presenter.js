@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { Camera } from "expo";
 
-const AddPhotoScreen = props => (
+const TakePhotoScreen = props => (
   <View style={styles.container}>
     <StatusBar hidden={true} />
     <Camera style={styles.camera} type={props.type} />
@@ -39,4 +39,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default AddPhotoScreen;
+export default TakePhotoScreen;

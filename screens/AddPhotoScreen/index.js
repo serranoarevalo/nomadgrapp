@@ -1,4 +1,4 @@
 import { connect } from "react-redux";
-import Container from "./container";
+import AddPhotoNavigation from "../../navigation/AddPhotoNavigation";
 
-export default connect()(Container);
+export default AddPhotoNavigation;
