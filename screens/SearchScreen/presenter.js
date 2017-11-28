@@ -9,7 +9,6 @@ import {
   TextInput,
   Dimensions
 } from "react-native";
-import SearchBar from "../../components/SearchBar";
 import SquarePhoto from "../../components/SquarePhoto";
 
 const SearchScreen = props => (
@@ -55,7 +54,7 @@ SearchScreen.propTypes = {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1 },
+  container: { flex: 1, backgroundColor: "white" },
   photosContainer: {
     flexDirection: "row",
     flex: 1

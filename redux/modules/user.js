@@ -7,6 +7,7 @@ import { Alert } from "react-native";
 const LOG_IN = "LOG_IN";
 const LOG_OUT = "LOG_OUT";
 const SET_USER = "SET_USER";
+const SET_NOTIFICATIONS = "SET_NOTIFICATIONS";
 // action creators
 
 function setLogIn(token) {
@@ -26,6 +27,13 @@ function setUser(user) {
   return {
     type: SET_USER,
     user
+  };
+}
+
+function setSetNotifications(notifications) {
+  return {
+    type: SET_NOTIFICATIONS,
+    notifications
   };
 }
 
@@ -107,7 +115,7 @@ function getNotifications() {
         }
         return response.json();
       })
-      .then(json => {});
+      .then(json => dispatch(setSetNotifications(json)));
   };
 }
 
@@ -145,6 +153,8 @@ function reducer(state = initialState, action) {
       return applyLogOut();
     case SET_USER:
       return applySetUser(state, action);
+    case SET_NOTIFICATIONS:
+      return applySetNotifications(state, action);
     default:
       return state;
   }
@@ -171,6 +181,11 @@ function applySetUser(state, action) {
     ...state,
     ...user
   };
+}
+
+function applySetNotifications(state, action) {
+  const { notifications } = action;
+  return { ...state, notifications };
 }
 
 // exports

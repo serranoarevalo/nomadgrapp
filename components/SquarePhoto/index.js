@@ -9,14 +9,13 @@ import {
   Text
 } from "react-native";
 import FadeIn from "react-native-fade-in-image";
+import FitImage from "react-native-fit-image";
 const width = Dimensions.get("window").width;
 import { API_URL } from "../../constants";
 
 const SquarePhoto = props => (
   <TouchableOpacity onPress={props.onPress}>
-    <FadeIn>
-      <Image source={{ uri: API_URL + props.imageUrl }} style={styles.image} />
-    </FadeIn>
+    <FitImage source={{ uri: API_URL + props.imageUrl }} style={styles.image} />
   </TouchableOpacity>
 );
 

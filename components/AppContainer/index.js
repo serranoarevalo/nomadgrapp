@@ -16,7 +16,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     initApp: username => {
       dispatch(photoActions.getFeed());
       dispatch(photoActions.getSearch());
-      // dispatch(userActions.getNotifications());
+      dispatch(userActions.getNotifications());
       // dispatch(userActions.getUserProfile(username));
     }
   };

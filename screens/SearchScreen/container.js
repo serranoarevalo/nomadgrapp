@@ -15,18 +15,23 @@ class Container extends Component {
     photoList: PropTypes.array,
     searchPhotos: PropTypes.func.isRequired
   };
+  static defaultProps = {
+    photoList: []
+  };
   state = {
     isFetching: true,
     inputText: "",
     searchingBy: ""
   };
   componentDidMount() {
-    const { photoList, navigation } = this.props;
+    const { photoList, navigation, searchPhotos } = this.props;
     const { inputText } = this.state;
     if (photoList) {
       this.setState({
         isFetching: false
       });
+    } else {
+      searchPhotos("");
     }
     navigation.setParams({
       submitSearch: this._submitSearch
@@ -44,7 +49,8 @@ class Container extends Component {
     const { searchPhotos } = this.props;
     searchPhotos(text);
     this.setState({
-      searchingBy: text
+      searchingBy: text,
+      isFetching: true
     });
   };
   _handleInputChange = text => {
