@@ -6,8 +6,6 @@ import { actionCreators as userActions } from "./user";
 // Actions
 
 const ADD_FEED = "ADD_FEED";
-const LIKE_PHOTO = "LIKE_PHOTO";
-const UNLIKE_PHOTO = "UNLIKE_PHOTO";
 const SET_SEARCH = "SET_SEARCH";
 
 // Action Creators
@@ -16,20 +14,6 @@ function addFeed(feed) {
   return {
     type: ADD_FEED,
     feed
-  };
-}
-
-function dolikePhoto(photoId) {
-  return {
-    type: LIKE_PHOTO,
-    photoId
-  };
-}
-
-function doUnlikePhoto(photoId) {
-  return {
-    type: UNLIKE_PHOTO,
-    photoId
   };
 }
 
@@ -103,7 +87,6 @@ function searchByTerm(searchTerm) {
 function likePhoto(photoId) {
   return (dispatch, getState) => {
     const { user: { token } } = getState();
-    dispatch(dolikePhoto(photoId));
     return fetch(`${API_URL}/images/${photoId}/likes/`, {
       method: "POST",
       headers: {
@@ -112,8 +95,8 @@ function likePhoto(photoId) {
     }).then(response => {
       if (response.status === 401) {
         dispatch(userActions.logout());
-      } else if (!response.ok) {
-        dispatch(doUnlikePhoto(photoId));
+      } else if (response.ok) {
+        return "ok";
       }
     });
   };
@@ -121,7 +104,6 @@ function likePhoto(photoId) {
 
 function unlikePhoto(photoId) {
   return (dispatch, getState) => {
-    dispatch(doUnlikePhoto(photoId));
     const { user: { token } } = getState();
     return fetch(`${API_URL}/images/${photoId}/unlikes/`, {
       method: "DELETE",
@@ -131,8 +113,8 @@ function unlikePhoto(photoId) {
     }).then(response => {
       if (response.status === 401) {
         dispatch(userActions.logout());
-      } else if (!response.ok) {
-        dispatch(doLikePhoto(photoId));
+      } else if (response.ok) {
+        return "ok";
       }
     });
   };
@@ -148,10 +130,6 @@ function reducer(state = initialState, action) {
   switch (action.type) {
     case ADD_FEED:
       return applyAddFeed(state, action);
-    case LIKE_PHOTO:
-      return applyLikePhoto(state, action);
-    case UNLIKE_PHOTO:
-      return applyUnlikePhoto(state, action);
     case SET_SEARCH:
       return applySetSearch(state, action);
     default:
@@ -167,30 +145,6 @@ function applyAddFeed(state, action) {
     ...state,
     feed
   };
-}
-
-function applyLikePhoto(state, action) {
-  const { photoId } = action;
-  const { feed } = state;
-  const updatedFeed = feed.map(photo => {
-    if (photo.id === photoId) {
-      return { ...photo, is_liked: true, like_count: photo.like_count + 1 };
-    }
-    return photo;
-  });
-  return { ...state, feed: updatedFeed };
-}
-
-function applyUnlikePhoto(state, action) {
-  const { photoId } = action;
-  const { feed } = state;
-  const updatedFeed = feed.map(photo => {
-    if (photo.id === photoId) {
-      return { ...photo, is_liked: false, like_count: photo.like_count - 1 };
-    }
-    return photo;
-  });
-  return { ...state, feed: updatedFeed };
 }
 
 function applySetSearch(state, action) {

@@ -38,9 +38,10 @@ const Photo = props => (
     />
     <View style={styles.photoMeta}>
       <PhotoActions
-        isLiked={props.is_liked}
+        isLiked={props.isLiked}
         photoId={props.id}
-        likeCount={props.like_count}
+        handlePress={props.handlePress}
+        likeCount={props.likeCount}
       />
       <View style={styles.comment}>
         <Text style={styles.author}>
@@ -68,7 +69,7 @@ const Photo = props => (
 
 const styles = StyleSheet.create({
   photo: {
-    flex: 1
+    width
   },
   header: {
     paddingLeft: 15,
@@ -146,7 +147,10 @@ Photo.propTypes = {
   ).isRequired,
   natural_time: PropTypes.string.isRequired,
   is_liked: PropTypes.bool.isRequired,
-  is_vertical: PropTypes.bool.isRequired
+  is_vertical: PropTypes.bool.isRequired,
+  handlePress: PropTypes.func.isRequired,
+  isLiked: PropTypes.bool.isRequired,
+  likeCount: PropTypes.number.isRequired
 };
 
 export default Photo;

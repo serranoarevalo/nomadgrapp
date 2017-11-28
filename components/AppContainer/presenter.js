@@ -11,8 +11,8 @@ class AppContainer extends Component {
   };
   componentWillReceiveProps = nextProps => {
     const { initApp } = this.props;
-    if (nextProps.isLoggedIn && nextProps.profile) {
-      initApp(nextProps.username);
+    if (nextProps.isLoggedIn && !nextProps.profile) {
+      initApp(nextProps.profile.username);
     }
   };
   componentDidMount() {
@@ -21,7 +21,6 @@ class AppContainer extends Component {
       initApp(profile.username);
     }
   }
-
   render() {
     const { isLoggedIn, profile } = this.props;
     return (

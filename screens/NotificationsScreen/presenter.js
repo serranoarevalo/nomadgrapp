@@ -19,8 +19,6 @@ const NotificationsScreen = props => (
           refreshing={props.isFetching}
           onRefresh={props.onRefresh}
           tintColor={"black"}
-          title={"Reload"}
-          titleColor={"black"}
         />
       }
     >

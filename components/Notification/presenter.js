@@ -73,6 +73,9 @@ class Notification extends Component {
           <Button
             text={following ? "Unfollow" : "Follow"}
             onPress={this._handleFollowClick}
+            backgroundColor="#3e99ee"
+            textColor="white"
+            borderColor="#3e99ee"
           />
         ) : (
           <FadeIn>
