@@ -24,7 +24,7 @@ const NotificationsScreen = props => (
         />
       }
     >
-      {props.notificationList.length === 0 ? (
+      {props.notificationList && props.notificationList.length === 0 ? (
         <Text style={styles.notFound}>
           No notifications yet! Come back soon!
         </Text>

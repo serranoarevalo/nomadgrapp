@@ -61,6 +61,7 @@ const Photo = props => (
           </TouchableOpacity>
         </View>
       )}
+      <Text style={styles.dateText}>{props.natural_time.toUpperCase()}</Text>
     </View>
   </View>
 );
@@ -115,6 +116,11 @@ const styles = StyleSheet.create({
   linkText: {
     fontSize: 14,
     color: "#999"
+  },
+  dateText: {
+    fontSize: 10,
+    color: "#999",
+    marginTop: 5
   }
 });
 

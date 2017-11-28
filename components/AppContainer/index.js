@@ -7,7 +7,7 @@ const mapStateToProps = (state, ownProps) => {
   const { user } = state;
   return {
     isLoggedIn: user.isLoggedIn,
-    username: user.username
+    profile: user.profile
   };
 };
 
@@ -17,7 +17,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       dispatch(photoActions.getFeed());
       dispatch(photoActions.getSearch());
       dispatch(userActions.getNotifications());
-      // dispatch(userActions.getUserProfile(username));
+      dispatch(userActions.getUserProfile(username));
     }
   };
 };

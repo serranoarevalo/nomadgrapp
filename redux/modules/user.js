@@ -2,7 +2,7 @@
 import { API_URL, FB_APP_ID } from "../../constants";
 import { actionCreators as uiActions } from "./ui";
 import { Facebook } from "expo";
-import { Alert } from "react-native";
+import { Alert, AsyncStorage } from "react-native";
 // actions
 const LOG_IN = "LOG_IN";
 const LOG_OUT = "LOG_OUT";
@@ -133,7 +133,7 @@ function getUserProfile(username) {
         }
         return response.json();
       })
-      .then(json => {});
+      .then(json => dispatch(setUser(json)));
   };
 }
 
@@ -210,6 +210,7 @@ function applySetLogIn(state, action) {
 }
 
 function applyLogOut(state, action) {
+  AsyncStorage.clear();
   return {
     ...state,
     isLoggedIn: false,
@@ -221,7 +222,7 @@ function applySetUser(state, action) {
   const { user } = action;
   return {
     ...state,
-    ...user
+    profile: user
   };
 }
 

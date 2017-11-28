@@ -6,6 +6,13 @@ import FadeIn from "react-native-fade-in-image";
 import Button from "../Button";
 
 class Notification extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      following: props.creator.following
+    };
+  }
+
   static propTypes = {
     comment: PropTypes.string,
     created_at: PropTypes.string.isRequired,
@@ -24,9 +31,6 @@ class Notification extends Component {
       .isRequired,
     to: PropTypes.number.isRequired,
     updated_at: PropTypes.string.isRequired
-  };
-  state = {
-    following: this.props.creator.following
   };
   _handleFollowClick = async () => {
     const { followUser, unfollowUser } = this.props;
@@ -51,7 +55,6 @@ class Notification extends Component {
   render() {
     const { following } = this.state;
     const { creator, notification_type, image, comment } = this.props;
-    console.log(creator.following);
     return (
       <View style={styles.container}>
         <FadeIn>

@@ -11,23 +11,23 @@ class AppContainer extends Component {
   };
   componentWillReceiveProps = nextProps => {
     const { initApp } = this.props;
-    if (nextProps.isLoggedIn && nextProps.username) {
+    if (nextProps.isLoggedIn && nextProps.profile) {
       initApp(nextProps.username);
     }
   };
   componentDidMount() {
-    const { isLoggedIn, username, initApp } = this.props;
-    if (isLoggedIn && username) {
-      initApp(username);
+    const { isLoggedIn, profile, initApp } = this.props;
+    if (isLoggedIn && profile) {
+      initApp(profile.username);
     }
   }
 
   render() {
-    const { isLoggedIn, username } = this.props;
+    const { isLoggedIn, profile } = this.props;
     return (
       <View style={styles.container}>
-        {isLoggedIn && username ? (
-          <RootNavigation screenProps={{ username: username }} />
+        {isLoggedIn && profile ? (
+          <RootNavigation screenProps={{ username: profile.username }} />
         ) : (
           <LoggedOutNavigation />
         )}
