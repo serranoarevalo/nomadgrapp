@@ -38,10 +38,7 @@ const Notification = props => (
       />
     ) : (
       <FadeIn>
-        <Image
-          source={{ uri: API_URL + props.image.file }}
-          style={styles.payload}
-        />
+        <Image source={{ uri: props.image.file }} style={styles.payload} />
       </FadeIn>
     )}
   </View>

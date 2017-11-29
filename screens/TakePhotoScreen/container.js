@@ -5,25 +5,27 @@ import {
   TouchableOpacity,
   StyleSheet,
   StatusBar,
-  CameraRoll
+  CameraRoll,
+  Image
 } from "react-native";
-import { Camera, Permissions } from "expo";
+import { Camera, Permissions, FileSystem } from "expo";
+import FitImage from "react-native-fit-image";
 import { MaterialIcons } from "@expo/vector-icons";
+import uuidv1 from "uuid/v1";
 
 class Container extends Component {
   state = {
     hasCameraPermission: null,
-    hasCameraRollPermission: null,
     type: Camera.Constants.Type.back,
-    flash: Camera.Constants.FlashMode.off
+    flash: Camera.Constants.FlashMode.off,
+    pictureTaken: false,
+    picture: null
   };
 
   async componentWillMount() {
     const camera = await Permissions.askAsync(Permissions.CAMERA);
-    // const cameraRoll = await Permissions.askAsync(Permissions.CAMERA_ROLL);
     this.setState({
       hasCameraPermission: camera.status === "granted"
-      // hasCameraRollPermission: cameraRoll.status === "granted"
     });
   }
 
@@ -38,11 +40,16 @@ class Container extends Component {
   };
 
   _takePhoto = async () => {
-    if (this.camera) {
-      let result = await this.camera.takePictureAsync({
-        quality: 0.5
-      });
-      let saveResult = await CameraRoll.saveToCameraRoll(result.uri, "photo");
+    const { pictureTaken } = this.state;
+
+    if (!pictureTaken) {
+      if (this.camera) {
+        let result = await this.camera.takePictureAsync({
+          quality: 0.5
+        });
+        this.setState({ pictureTaken: true, picture: result.uri });
+        let saveResult = await CameraRoll.saveToCameraRoll(result.uri, "photo");
+      }
     }
   };
 
@@ -59,7 +66,13 @@ class Container extends Component {
   };
 
   render() {
-    const { hasCameraPermission, type, flash } = this.state;
+    const {
+      hasCameraPermission,
+      type,
+      flash,
+      pictureTaken,
+      picture
+    } = this.state;
     if (hasCameraPermission === null) {
       return <View />;
     } else if (hasCameraPermission === false) {
@@ -68,37 +81,52 @@ class Container extends Component {
       return (
         <View style={styles.container}>
           <StatusBar hidden={true} />
-          <Camera
-            style={styles.camera}
-            type={type}
-            flashMode={flash}
-            ref={ref => {
-              this.camera = ref;
-            }}
-          >
-            <TouchableOpacity onPressOut={this._toggleCameraType}>
-              <View style={styles.action}>
-                <MaterialIcons
-                  name={type === 0 ? "camera-front" : "camera-rear"}
-                  color="white"
-                  size={40}
-                />
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPressOut={this._changeCameraFlash}>
-              <View style={styles.action}>
-                {flash === 0 && (
-                  <MaterialIcons name={"flash-off"} color="white" size={40} />
-                )}
-                {flash === 1 && (
-                  <MaterialIcons name={"flash-on"} color="white" size={40} />
-                )}
-                {flash === 2 && (
-                  <MaterialIcons name={"flash-auto"} color="white" size={40} />
-                )}
-              </View>
-            </TouchableOpacity>
-          </Camera>
+          {pictureTaken && picture ? (
+            <View style={{ flex: 2 }}>
+              <FitImage
+                source={{ uri: picture }}
+                style={{ flex: 1 }}
+                onError={e => console.log(e)}
+              />
+            </View>
+          ) : (
+            <Camera
+              style={styles.camera}
+              type={type}
+              flashMode={flash}
+              ref={ref => {
+                this.camera = ref;
+              }}
+            >
+              <TouchableOpacity onPressOut={this._toggleCameraType}>
+                <View style={styles.action}>
+                  <MaterialIcons
+                    name={type === 0 ? "camera-front" : "camera-rear"}
+                    color="white"
+                    size={40}
+                  />
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity onPressOut={this._changeCameraFlash}>
+                <View style={styles.action}>
+                  {flash === 0 && (
+                    <MaterialIcons name={"flash-off"} color="white" size={40} />
+                  )}
+                  {flash === 1 && (
+                    <MaterialIcons name={"flash-on"} color="white" size={40} />
+                  )}
+                  {flash === 2 && (
+                    <MaterialIcons
+                      name={"flash-auto"}
+                      color="white"
+                      size={40}
+                    />
+                  )}
+                </View>
+              </TouchableOpacity>
+            </Camera>
+          )}
+
           <View style={styles.btnContainer}>
             <TouchableOpacity onPress={this._takePhoto}>
               <View style={styles.btn} />
