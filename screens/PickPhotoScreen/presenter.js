@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {
   Text,
   View,
@@ -29,7 +30,7 @@ const PickPhotoScreen = props => (
         <ScrollView contentContainerStyle={styles.scrollContainer}>
           {props.photos.map(photo => (
             <SquarePhoto
-              onPress={() => {}}
+              onPress={() => props.pickPhoto(photo)}
               imageUrl={photo.node.image.uri}
               key={photo.node.timestamp}
             />
@@ -40,13 +41,17 @@ const PickPhotoScreen = props => (
   </View>
 );
 
+PropTypes.propTypes = {
+  pickPhoto: PropTypes.func.isRequired
+};
+
 const styles = StyleSheet.create({
   container: { flex: 1 },
   pictureContainer: {
-    flex: 1
+    flex: 2
   },
   pickedPhoto: {
-    flex: 2
+    flex: 1
   },
   photos: {
     flex: 1
