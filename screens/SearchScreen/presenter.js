@@ -29,7 +29,11 @@ const SearchScreen = props => (
       ) : (
         <View style={styles.photosContainer}>
           {props.photoList.map(photo => (
-            <SquarePhoto key={photo.id} imageUrl={photo.file} />
+            <SquarePhoto
+              key={photo.id}
+              imageUrl={photo.file}
+              onPress={() => props.navigate("PhotoDetail")}
+            />
           ))}
         </View>
       )}

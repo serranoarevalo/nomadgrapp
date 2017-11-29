@@ -62,7 +62,7 @@ class Container extends Component {
     searchPhotos(searchingBy);
   };
   render() {
-    const { photoList } = this.props;
+    const { photoList, navigation: { navigate } } = this.props;
     return (
       <SearchScreen
         {...this.state}
@@ -70,6 +70,7 @@ class Container extends Component {
         onInputChange={this._handleInputChange}
         onRefresh={this._handleRefresh}
         photoList={photoList}
+        navigate={navigate}
       />
     );
   }

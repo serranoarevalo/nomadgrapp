@@ -4,35 +4,56 @@ import {
   View,
   TouchableOpacity,
   StyleSheet,
-  StatusBar
+  StatusBar,
+  Image,
+  Dimensions,
+  ScrollView
 } from "react-native";
+import SquarePhoto from "../../components/SquarePhoto";
+import FitImage from "react-native-fit-image";
+
+const { height, width } = Dimensions.get("window");
 
 const PickPhotoScreen = props => (
   <View style={styles.container}>
-    <View style={styles.btnContainer}>
-      <TouchableOpacity>
-        <View style={styles.btn} />
-      </TouchableOpacity>
-    </View>
+    {props.photos && (
+      <View style={styles.pictureContainer}>
+        <FitImage
+          source={{ uri: props.pickedPhoto.node.image.uri }}
+          style={styles.pickedPhoto}
+        />
+      </View>
+    )}
+    {props.photos && (
+      <View style={styles.photos}>
+        <ScrollView contentContainerStyle={styles.scrollContainer}>
+          {props.photos.map(photo => (
+            <SquarePhoto
+              onPress={() => {}}
+              imageUrl={photo.node.image.uri}
+              key={photo.node.timestamp}
+            />
+          ))}
+        </ScrollView>
+      </View>
+    )}
   </View>
 );
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
-  camera: { flex: 2 },
-  btnContainer: {
-    flex: 1,
-    backgroundColor: "white",
-    justifyContent: "center",
-    alignItems: "center"
+  pictureContainer: {
+    flex: 1
   },
-  btn: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    borderWidth: 15,
-    borderColor: "#bbb",
-    backgroundColor: "white"
+  pickedPhoto: {
+    flex: 2
+  },
+  photos: {
+    flex: 1
+  },
+  scrollContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap"
   }
 });
 
