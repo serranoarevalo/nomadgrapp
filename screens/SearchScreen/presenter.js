@@ -23,9 +23,11 @@ const SearchScreen = props => (
       }
     >
       {props.photoList.length === 0 && props.searchingBy.length > 1 ? (
-        <Text style={styles.notFound}>
-          No images found for {props.searchingBy}
-        </Text>
+        !props.isFetching && (
+          <Text style={styles.notFound}>
+            No images found for {props.searchingBy}
+          </Text>
+        )
       ) : (
         <View style={styles.photosContainer}>
           {props.photoList.map(photo => (

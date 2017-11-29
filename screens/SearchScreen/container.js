@@ -47,10 +47,12 @@ class Container extends Component {
   _submitSearch = text => {
     const { searchingBy } = this.state;
     const { searchPhotos } = this.props;
-    searchPhotos(text);
     this.setState({
-      searchingBy: text,
       isFetching: true
+    });
+    searchPhotos(text.toLowerCase());
+    this.setState({
+      searchingBy: text
     });
   };
   _handleInputChange = text => {
@@ -59,7 +61,7 @@ class Container extends Component {
   _handleRefresh = () => {
     const { searchPhotos } = this.props;
     const { searchingBy } = this.state;
-    searchPhotos(searchingBy);
+    searchPhotos(searchingBy.toLowerCase());
   };
   render() {
     const { photoList, navigation: { navigate } } = this.props;

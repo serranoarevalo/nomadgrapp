@@ -16,7 +16,6 @@ class Container extends Component {
   }
   componentDidMount = () => {
     this._getProfile();
-    console.log(this.state);
   };
   _getProfile = async () => {
     const { profile } = this.state;
