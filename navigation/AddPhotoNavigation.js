@@ -26,12 +26,13 @@ const AddPhotoNavigation = TabNavigator(
     tabBarOptions: {
       showLabel: true,
       upperCaseLabel: true,
+      activeTintColor: "black",
+      inactiveTintColor: "#999",
       style: {
         backgroundColor: "white",
         alignItems: "center"
       },
       labelStyle: {
-        color: "black",
         fontSize: 14,
         fontWeight: "600"
       },

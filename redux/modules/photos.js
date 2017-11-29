@@ -2,6 +2,7 @@
 
 import { API_URL } from "../../constants";
 import { actionCreators as userActions } from "./user";
+import { CameraRoll } from "react-native";
 
 // Actions
 

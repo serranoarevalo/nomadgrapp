@@ -6,11 +6,9 @@ import {
   StyleSheet,
   StatusBar
 } from "react-native";
-import { Camera } from "expo";
 
 const PickPhotoScreen = props => (
   <View style={styles.container}>
-    <StatusBar hidden={true} />
     <View style={styles.btnContainer}>
       <TouchableOpacity>
         <View style={styles.btn} />

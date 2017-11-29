@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, StatusBar } from "react-native";
 import LoggedOutNavigation from "../../navigation/LoggedOutNavigation";
 import RootNavigation from "../../navigation/RootNavigation";
 
@@ -11,7 +11,7 @@ class AppContainer extends Component {
   };
   componentWillReceiveProps = nextProps => {
     const { initApp } = this.props;
-    if (nextProps.isLoggedIn && !nextProps.profile) {
+    if (nextProps.isLoggedIn && !this.props.isLoggedIn) {
       initApp(nextProps.profile.username);
     }
   };
@@ -25,6 +25,7 @@ class AppContainer extends Component {
     const { isLoggedIn, profile } = this.props;
     return (
       <View style={styles.container}>
+        <StatusBar hidden={false} />
         {isLoggedIn && profile ? (
           <RootNavigation screenProps={{ username: profile.username }} />
         ) : (

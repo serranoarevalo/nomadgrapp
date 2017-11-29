@@ -1,6 +1,6 @@
 import React from "react";
 import { AppLoading, Asset, Font } from "expo";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/es/integration/react";
 import configureStore from "./redux/configureStore";
@@ -39,7 +39,8 @@ export default class App extends React.Component {
         require("./assets/images/logo-white.png")
       ]),
       Font.loadAsync({
-        ...Ionicons.font
+        ...Ionicons.font,
+        ...MaterialIcons.font
       })
     ]);
   };

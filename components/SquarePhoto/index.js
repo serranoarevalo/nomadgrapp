@@ -16,7 +16,9 @@ import { withNavigation } from "react-navigation";
 
 const SquarePhoto = props => (
   <TouchableOpacity onPress={() => props.navigation.navigate("PhotoDetail")}>
-    <FitImage source={{ uri: props.imageUrl }} style={styles.image} />
+    <FadeIn>
+      <Image source={{ uri: props.imageUrl }} style={styles.image} />
+    </FadeIn>
   </TouchableOpacity>
 );
 

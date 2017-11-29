@@ -1,5 +1,6 @@
 import { StackNavigator } from "react-navigation";
 import AddPhotoScreen from "../screens/AddPhotoScreen";
+import TakePhotoScreen from "../screens/TakePhotoScreen";
 import TabsNavigation from "./TabsNavigation";
 
 const RootNavigator = StackNavigator(
