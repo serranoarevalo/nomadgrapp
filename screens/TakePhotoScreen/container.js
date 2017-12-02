@@ -28,43 +28,6 @@ class Container extends Component {
       hasCameraPermission: camera.status === "granted"
     });
   }
-
-  _toggleCameraType = () => {
-    this.setState(prevState => {
-      if (prevState.type === Camera.Constants.Type.back) {
-        return { type: Camera.Constants.Type.front };
-      } else {
-        return { type: Camera.Constants.Type.back };
-      }
-    });
-  };
-
-  _takePhoto = async () => {
-    const { pictureTaken } = this.state;
-
-    if (!pictureTaken) {
-      if (this.camera) {
-        let result = await this.camera.takePictureAsync({
-          quality: 0.5
-        });
-        this.setState({ pictureTaken: true, picture: result.uri });
-        let saveResult = await CameraRoll.saveToCameraRoll(result.uri, "photo");
-      }
-    }
-  };
-
-  _changeCameraFlash = () => {
-    this.setState(prevState => {
-      if (prevState.flash === Camera.Constants.FlashMode.off) {
-        return { flash: Camera.Constants.FlashMode.on };
-      } else if (prevState.flash === Camera.Constants.FlashMode.on) {
-        return { flash: Camera.Constants.FlashMode.auto };
-      } else if (prevState.flash == Camera.Constants.FlashMode.auto) {
-        return { flash: Camera.Constants.FlashMode.off };
-      }
-    });
-  };
-
   render() {
     const {
       hasCameraPermission,
@@ -128,14 +91,70 @@ class Container extends Component {
           )}
 
           <View style={styles.btnContainer}>
-            <TouchableOpacity onPress={this._takePhoto}>
-              <View style={styles.btn} />
-            </TouchableOpacity>
+            {pictureTaken ? (
+              <View style={styles.photoActions}>
+                <TouchableOpacity onPressOut={this._retakePhoto}>
+                  <MaterialIcons name={"cancel"} color="#353535" size={60} />
+                </TouchableOpacity>
+                <TouchableOpacity>
+                  <MaterialIcons
+                    name={"check-circle"}
+                    color="#353535"
+                    size={60}
+                  />
+                </TouchableOpacity>
+              </View>
+            ) : (
+              <TouchableOpacity onPress={this._takePhoto}>
+                <View style={styles.btn} />
+              </TouchableOpacity>
+            )}
           </View>
         </View>
       );
     }
   }
+  _toggleCameraType = () => {
+    this.setState(prevState => {
+      if (prevState.type === Camera.Constants.Type.back) {
+        return { type: Camera.Constants.Type.front };
+      } else {
+        return { type: Camera.Constants.Type.back };
+      }
+    });
+  };
+
+  _takePhoto = async () => {
+    const { pictureTaken } = this.state;
+
+    if (!pictureTaken) {
+      if (this.camera) {
+        let result = await this.camera.takePictureAsync({
+          quality: 0.5
+        });
+        this.setState({ pictureTaken: true, picture: result.uri });
+        let saveResult = await CameraRoll.saveToCameraRoll(result.uri, "photo");
+      }
+    }
+  };
+
+  _changeCameraFlash = () => {
+    this.setState(prevState => {
+      if (prevState.flash === Camera.Constants.FlashMode.off) {
+        return { flash: Camera.Constants.FlashMode.on };
+      } else if (prevState.flash === Camera.Constants.FlashMode.on) {
+        return { flash: Camera.Constants.FlashMode.auto };
+      } else if (prevState.flash == Camera.Constants.FlashMode.auto) {
+        return { flash: Camera.Constants.FlashMode.off };
+      }
+    });
+  };
+  _retakePhoto = () => {
+    this.setState({
+      picture: null,
+      pictureTaken: false
+    });
+  };
 }
 
 const styles = StyleSheet.create({
@@ -165,6 +184,13 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
     height: 40,
     margin: 10
+  },
+  photoActions: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    flex: 1,
+    alignItems: "center",
+    width: 300
   }
 });
 

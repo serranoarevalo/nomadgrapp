@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import SquarePhoto from "../../components/SquarePhoto";
 import FitImage from "react-native-fit-image";
+import uuidv1 from "uuid/v1";
 
 const { height, width } = Dimensions.get("window");
 
@@ -32,7 +33,7 @@ const PickPhotoScreen = props => (
             <SquarePhoto
               onPress={() => props.pickPhoto(photo)}
               imageUrl={photo.node.image.uri}
-              key={photo.node.timestamp}
+              key={photo.node.timestamp + uuidv1()}
             />
           ))}
         </ScrollView>
