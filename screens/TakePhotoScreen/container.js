@@ -96,7 +96,7 @@ class Container extends Component {
                 <TouchableOpacity onPressOut={this._retakePhoto}>
                   <MaterialIcons name={"cancel"} color="#353535" size={60} />
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity onPressOut={this._approvePhoto}>
                   <MaterialIcons
                     name={"check-circle"}
                     color="#353535"
@@ -133,7 +133,6 @@ class Container extends Component {
           quality: 0.5
         });
         this.setState({ pictureTaken: true, picture: result.uri });
-        let saveResult = await CameraRoll.saveToCameraRoll(result.uri, "photo");
       }
     }
   };
@@ -152,6 +151,13 @@ class Container extends Component {
   _retakePhoto = () => {
     this.setState({
       picture: null,
+      pictureTaken: false
+    });
+  };
+  _approvePhoto = async () => {
+    const { picture } = this.state;
+    let saveResult = await CameraRoll.saveToCameraRoll(picture, "photo");
+    this.setState({
       pictureTaken: false
     });
   };

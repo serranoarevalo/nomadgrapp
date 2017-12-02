@@ -11,8 +11,8 @@ class Container extends Component {
   async componentWillMount() {
     let { edges } = await CameraRoll.getPhotos({
       first: 2000,
-      groupTypes: "All",
-      assetType: "All"
+      groupTypes: "SavedPhotos",
+      assetType: "Photos"
     });
     this.setState({
       photos: edges,

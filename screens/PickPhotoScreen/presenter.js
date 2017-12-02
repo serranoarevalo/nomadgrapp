@@ -33,7 +33,7 @@ const PickPhotoScreen = props => (
             <SquarePhoto
               onPress={() => props.pickPhoto(photo)}
               imageUrl={photo.node.image.uri}
-              key={photo.node.timestamp + uuidv1()}
+              key={photo.node.timestamp + photo.node.image.uri}
             />
           ))}
         </ScrollView>
