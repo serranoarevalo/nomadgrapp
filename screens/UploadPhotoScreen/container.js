@@ -9,7 +9,7 @@ class Container extends Component {
     hashtags: ""
   };
   render() {
-    <UploadPhotoScreen {...this.state} {...this.props} />;
+    return <UploadPhotoScreen {...this.state} {...this.props} />;
   }
 }
 

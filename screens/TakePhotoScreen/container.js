@@ -156,7 +156,9 @@ class Container extends Component {
   };
   _approvePhoto = async () => {
     const { picture } = this.state;
+    const { navigation: { navigate } } = this.props;
     let saveResult = await CameraRoll.saveToCameraRoll(picture, "photo");
+    navigate("UploadPhotoModal");
     this.setState({
       pictureTaken: false
     });

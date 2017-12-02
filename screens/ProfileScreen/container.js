@@ -27,6 +27,12 @@ class Container extends Component {
       });
     }
   };
+  render() {
+    const { profile } = this.props;
+    return (
+      <Profile user={profile} {...this.state} getProfile={this._getProfile} />
+    );
+  }
   _getProfile = () => {
     const { getUserProfile, profile } = this.props;
     this.setState(
@@ -36,12 +42,6 @@ class Container extends Component {
       getUserProfile(profile.username)
     );
   };
-  render() {
-    const { profile } = this.props;
-    return (
-      <Profile user={profile} {...this.state} getProfile={this._getProfile} />
-    );
-  }
 }
 
 export default Container;
