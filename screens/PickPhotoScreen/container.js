@@ -19,14 +19,21 @@ class Container extends Component {
       pickedPhoto: edges[0]
     });
   }
+  render() {
+    return (
+      <PickPhotoScreen
+        {...this.state}
+        pickPhoto={this._pickPhoto}
+        approvePhoto={this._approvePhoto}
+      />
+    );
+  }
   _pickPhoto = photo => {
     this.setState({
       pickedPhoto: photo
     });
   };
-  render() {
-    return <PickPhotoScreen {...this.state} pickPhoto={this._pickPhoto} />;
-  }
+  _approvePhoto = () => {};
 }
 
 export default Container;

@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import SquarePhoto from "../../components/SquarePhoto";
 import FitImage from "react-native-fit-image";
+import { MaterialIcons } from "@expo/vector-icons";
 import uuidv1 from "uuid/v1";
 
 const { height, width } = Dimensions.get("window");
@@ -22,8 +23,13 @@ const PickPhotoScreen = props => (
       <View style={styles.pictureContainer}>
         <FitImage
           source={{ uri: props.pickedPhoto.node.image.uri }}
-          style={styles.pickedPhoto}
+          style={StyleSheet.absoluteFill}
         />
+        <TouchableOpacity onPressOut={props.approvePhoto}>
+          <View style={styles.approvePhoto}>
+            <MaterialIcons name={"check-circle"} color="white" size={60} />
+          </View>
+        </TouchableOpacity>
       </View>
     )}
     {props.photos && (
@@ -43,13 +49,17 @@ const PickPhotoScreen = props => (
 );
 
 PropTypes.propTypes = {
-  pickPhoto: PropTypes.func.isRequired
+  pickPhoto: PropTypes.func.isRequired,
+  photos: PropTypes.array.isRequired,
+  pickedPhoto: PropTypes.object.isRequired,
+  approvePhoto: PropTypes.func.isRequired
 };
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
   pictureContainer: {
-    flex: 2
+    flex: 2,
+    justifyContent: "flex-end"
   },
   pickedPhoto: {
     flex: 1
@@ -60,6 +70,13 @@ const styles = StyleSheet.create({
   scrollContainer: {
     flexDirection: "row",
     flexWrap: "wrap"
+  },
+  approvePhoto: {
+    width: 60,
+    backgroundColor: "transparent",
+    alignSelf: "flex-end",
+    marginBottom: 10,
+    marginRight: 10
   }
 });
 
