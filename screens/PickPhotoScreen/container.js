@@ -33,7 +33,11 @@ class Container extends Component {
       pickedPhoto: photo
     });
   };
-  _approvePhoto = () => {};
+  _approvePhoto = () => {
+    const { navigation: { navigate } } = this.props;
+    const { pickedPhoto } = this.state;
+    navigate("UploadPhotoModal", { photo: pickedPhoto.node.image.uri });
+  };
 }
 
 export default Container;

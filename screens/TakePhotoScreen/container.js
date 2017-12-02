@@ -158,7 +158,7 @@ class Container extends Component {
     const { picture } = this.state;
     const { navigation: { navigate } } = this.props;
     let saveResult = await CameraRoll.saveToCameraRoll(picture, "photo");
-    navigate("UploadPhotoModal");
+    navigate("UploadPhotoModal", { photo: picture });
     this.setState({
       pictureTaken: false
     });
