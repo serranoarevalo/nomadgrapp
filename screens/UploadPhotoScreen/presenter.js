@@ -8,7 +8,9 @@ import {
   StyleSheet,
   ScrollView,
   TextInput,
-  Dimensions
+  Dimensions,
+  TouchableOpacity,
+  ActivityIndicator
 } from "react-native";
 import FadeIn from "react-native-fade-in-image";
 const { width, height } = Dimensions.get("window");
@@ -27,7 +29,7 @@ const UploadPhotoScreen = props => (
           style={styles.caption}
           onChangeText={props.onCaptionChange}
           multiline={true}
-          placeholderTextColor={"#353535"}
+          placeholderTextColor={"#888"}
         />
       </View>
       <View style={styles.formRow}>
@@ -35,7 +37,7 @@ const UploadPhotoScreen = props => (
           value={props.location}
           placeholder={"Location"}
           style={styles.input}
-          placeholderTextColor={"#353535"}
+          placeholderTextColor={"#888"}
           onChangeText={props.onLocationChange}
         />
       </View>
@@ -44,10 +46,19 @@ const UploadPhotoScreen = props => (
           value={props.hashtags}
           placeholder={"Tags (separated by commas)"}
           style={styles.input}
-          placeholderTextColor={"#353535"}
+          placeholderTextColor={"#888"}
           onChangeText={props.onHashtagChange}
         />
       </View>
+      <TouchableOpacity onPressOut={props.submit}>
+        <View style={styles.uploadBtn}>
+          {props.isUploading ? (
+            <ActivityIndicator color="white" />
+          ) : (
+            <Text style={styles.uploadText}>Upload photo</Text>
+          )}
+        </View>
+      </TouchableOpacity>
     </ScrollView>
   </View>
 );
@@ -59,7 +70,9 @@ UploadPhotoScreen.propTypes = {
   hashtags: PropTypes.string.isRequired,
   onCaptionChange: PropTypes.func.isRequired,
   onLocationChange: PropTypes.func.isRequired,
-  onHashtagChange: PropTypes.func.isRequired
+  onHashtagChange: PropTypes.func.isRequired,
+  isUploading: PropTypes.bool.isRequired,
+  submit: PropTypes.func.isRequired
 };
 
 const styles = StyleSheet.create({
@@ -89,6 +102,21 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1
+  },
+  uploadBtn: {
+    alignSelf: "center",
+    justifyContent: "center",
+    marginTop: 20,
+    width: width / 2,
+    height: 50,
+    backgroundColor: "#3E99EE",
+    borderRadius: 25,
+    overflow: "hidden"
+  },
+  uploadText: {
+    color: "white",
+    fontWeight: "600",
+    textAlign: "center"
   }
 });
 

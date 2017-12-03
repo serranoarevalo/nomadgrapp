@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import UploadPhotoScreen from "./presenter";
+import { Alert } from "react-native";
 
 class Container extends Component {
   state = {
     location: "",
     caption: "",
-    hashtags: ""
+    hashtags: "",
+    isUploading: false
   };
   render() {
     const { navigation: { state: { params } } } = this.props;
@@ -18,6 +20,7 @@ class Container extends Component {
         onCaptionChange={this._onCaptionChange}
         onLocationChange={this._onLocationChange}
         onHashtagChange={this._onHashtagChange}
+        submit={this._submit}
       />
     );
   }
@@ -35,6 +38,19 @@ class Container extends Component {
     this.setState({
       hashtags: text
     });
+  };
+  _submit = () => {
+    const { location, caption, hashtags, isUploading } = this.state;
+    if (!isUploading) {
+      if (location && caption && hashtags) {
+        this.setState({
+          isUploading: true
+        });
+        //submit();
+      } else {
+        Alert.alert("All fields are required");
+      }
+    }
   };
 }
 

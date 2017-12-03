@@ -2,7 +2,7 @@
 
 import { API_URL } from "../../constants";
 import { actionCreators as userActions } from "./user";
-import { CameraRoll } from "react-native";
+import uuidv1 from "uuid/v1";
 
 // Actions
 
@@ -111,6 +111,31 @@ function unlikePhoto(photoId) {
       headers: {
         Authorization: `JWT ${token}`
       }
+    }).then(response => {
+      if (response.status === 401) {
+        dispatch(userActions.logout());
+      } else if (response.ok) {
+        return "ok";
+      }
+    });
+  };
+}
+
+function uploadPhoto(file, caption, location, hashtags) {
+  const data = new FormData();
+  data.append("caption", caption);
+  data.append("location", location);
+  data.append("hashtags", hashtags);
+  data.append("file", { uri: file, type: "image/jpeg", name: uuidv1() });
+  return (dispatch, getstate) => {
+    const { user: { token } } = getState();
+    return fetch(`${API_URL}/images/`, {
+      method: "POST",
+      headers: {
+        Authorization: `JWT ${token}`,
+        "Content-Type": "multipart/form-data"
+      },
+      body: data
     }).then(response => {
       if (response.status === 401) {
         dispatch(userActions.logout());
