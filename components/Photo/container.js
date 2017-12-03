@@ -12,6 +12,11 @@ class Container extends Component {
     is_liked: PropTypes.bool.isRequired,
     like_count: PropTypes.number.isRequired
   };
+  render() {
+    return (
+      <Photo {...this.props} {...this.state} handlePress={this._handlePress} />
+    );
+  }
   _handlePress = async () => {
     const { dispatchLike } = this.props;
     const { isLiked } = this.state;
@@ -29,11 +34,6 @@ class Container extends Component {
       });
     }
   };
-  render() {
-    return (
-      <Photo {...this.props} {...this.state} handlePress={this._handlePress} />
-    );
-  }
 }
 
 export default Container;

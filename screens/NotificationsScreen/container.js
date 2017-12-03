@@ -17,13 +17,6 @@ class Container extends Component {
   state = {
     isFetching: true
   };
-  _getNotifications = () => {
-    const { getNotifications } = this.props;
-    getNotifications();
-    this.setState({
-      isFetching: true
-    });
-  };
   componentDidMount = () => {
     const { notificationList } = this.props;
     if (notificationList) {
@@ -41,7 +34,6 @@ class Container extends Component {
       });
     }
   };
-
   render() {
     const { notificationList } = this.props;
     return (
@@ -52,6 +44,13 @@ class Container extends Component {
       />
     );
   }
+  _getNotifications = () => {
+    const { getNotifications } = this.props;
+    getNotifications();
+    this.setState({
+      isFetching: true
+    });
+  };
 }
 
 export default Container;

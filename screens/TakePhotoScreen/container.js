@@ -21,7 +21,6 @@ class Container extends Component {
     pictureTaken: false,
     picture: null
   };
-
   async componentWillMount() {
     const camera = await Permissions.askAsync(Permissions.CAMERA);
     this.setState({

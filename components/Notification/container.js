@@ -13,6 +13,15 @@ class Container extends Component {
     followUser: PropTypes.func.isRequired,
     unfollowUser: PropTypes.func.isRequired
   };
+  render() {
+    return (
+      <Notification
+        {...this.props}
+        {...this.state}
+        handleFollowClick={this._handleFollowClick}
+      />
+    );
+  }
   _handleFollowClick = async () => {
     const { followUser, unfollowUser } = this.props;
     const { following } = this.state;
@@ -33,15 +42,6 @@ class Container extends Component {
       }
     }
   };
-  render() {
-    return (
-      <Notification
-        {...this.props}
-        {...this.state}
-        handleFollowClick={this._handleFollowClick}
-      />
-    );
-  }
 }
 
 export default Container;

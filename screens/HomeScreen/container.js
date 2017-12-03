@@ -27,13 +27,6 @@ class Container extends Component {
     getFeed: PropTypes.func.isRequired,
     feed: PropTypes.array
   };
-  _refreshFeed = () => {
-    const { getFeed } = this.props;
-    this.setState({
-      isFetching: true
-    });
-    getFeed();
-  };
   componentWillReceiveProps = nextProps => {
     if (nextProps.feed) {
       this.setState({
@@ -59,6 +52,13 @@ class Container extends Component {
       />
     );
   }
+  _refreshFeed = () => {
+    const { getFeed } = this.props;
+    this.setState({
+      isFetching: true
+    });
+    getFeed();
+  };
 }
 
 export default Container;

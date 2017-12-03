@@ -7,13 +7,6 @@ class Container extends Component {
     isFetching: true,
     mode: "grid"
   };
-  _handleButtonPress = () => {};
-  _handleGridTap = () => {
-    this.setState({ mode: "grid" });
-  };
-  _handleListTap = () => {
-    this.setState({ mode: "list" });
-  };
   render() {
     const { user } = this.props;
     return (
@@ -27,6 +20,13 @@ class Container extends Component {
       />
     );
   }
+  _handleButtonPress = () => {};
+  _handleGridTap = () => {
+    this.setState({ mode: "grid" });
+  };
+  _handleListTap = () => {
+    this.setState({ mode: "list" });
+  };
 }
 
 export default Container;

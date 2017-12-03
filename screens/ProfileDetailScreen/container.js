@@ -17,6 +17,12 @@ class Container extends Component {
   componentDidMount = () => {
     this._getProfile();
   };
+  render() {
+    const { profile } = this.state;
+    return (
+      <Profile user={profile} {...this.state} getProfile={this._getProfile} />
+    );
+  }
   _getProfile = async () => {
     const { profile } = this.state;
     const { getUserProfile, navigation: { state: { params } } } = this.props;
@@ -31,12 +37,6 @@ class Container extends Component {
       });
     }
   };
-  render() {
-    const { profile } = this.state;
-    return (
-      <Profile user={profile} {...this.state} getProfile={this._getProfile} />
-    );
-  }
 }
 
 export default Container;

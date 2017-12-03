@@ -44,6 +44,19 @@ class Container extends Component {
       });
     }
   };
+  render() {
+    const { photoList, navigation: { navigate } } = this.props;
+    return (
+      <SearchScreen
+        {...this.state}
+        submitSearch={this._submitSearch}
+        onInputChange={this._handleInputChange}
+        onRefresh={this._handleRefresh}
+        photoList={photoList}
+        navigate={navigate}
+      />
+    );
+  }
   _submitSearch = text => {
     const { searchingBy } = this.state;
     const { searchPhotos } = this.props;
@@ -63,19 +76,6 @@ class Container extends Component {
     const { searchingBy } = this.state;
     searchPhotos(searchingBy.toLowerCase());
   };
-  render() {
-    const { photoList, navigation: { navigate } } = this.props;
-    return (
-      <SearchScreen
-        {...this.state}
-        submitSearch={this._submitSearch}
-        onInputChange={this._handleInputChange}
-        onRefresh={this._handleRefresh}
-        photoList={photoList}
-        navigate={navigate}
-      />
-    );
-  }
 }
 
 export default Container;
