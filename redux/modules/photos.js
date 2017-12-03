@@ -122,12 +122,17 @@ function unlikePhoto(photoId) {
 }
 
 function uploadPhoto(file, caption, location, hashtags) {
+  const hashtagArray = hashtags.split(",");
   const data = new FormData();
   data.append("caption", caption);
   data.append("location", location);
-  data.append("hashtags", hashtags);
-  data.append("file", { uri: file, type: "image/jpeg", name: uuidv1() });
-  return (dispatch, getstate) => {
+  data.append("tags", JSON.stringify(hashtagArray));
+  data.append("file", {
+    uri: file,
+    type: "image/jpeg",
+    name: `${uuidv1()}.jpg`
+  });
+  return (dispatch, getState) => {
     const { user: { token } } = getState();
     return fetch(`${API_URL}/images/`, {
       method: "POST",
@@ -140,6 +145,7 @@ function uploadPhoto(file, caption, location, hashtags) {
       if (response.status === 401) {
         dispatch(userActions.logout());
       } else if (response.ok) {
+        dispatch(getFeed());
         return "ok";
       }
     });
@@ -188,7 +194,8 @@ const actionCreators = {
   getSearch,
   likePhoto,
   unlikePhoto,
-  searchByTerm
+  searchByTerm,
+  uploadPhoto
 };
 
 export { actionCreators };

@@ -35,18 +35,29 @@ class Container extends Component {
     });
   };
   _onHashtagChange = text => {
-    this.setState({
-      hashtags: text
-    });
+    this.setState({ hashtags: text.replace(/ /g, ",") });
   };
-  _submit = () => {
+  _submit = async () => {
+    const {
+      submit,
+      navigation,
+      navigation: { state: { params } }
+    } = this.props;
     const { location, caption, hashtags, isUploading } = this.state;
     if (!isUploading) {
       if (location && caption && hashtags) {
         this.setState({
           isUploading: true
         });
-        //submit();
+        let sendPhoto = await submit(params.photo, caption, location, hashtags);
+        if (sendPhoto === "ok") {
+          this.setState({
+            isUploading: false
+          });
+          navigation.goBack(null);
+          navigation.goBack(null);
+          navigation.goBack(null);
+        }
       } else {
         Alert.alert("All fields are required");
       }

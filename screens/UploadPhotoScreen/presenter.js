@@ -48,6 +48,7 @@ const UploadPhotoScreen = props => (
           style={styles.input}
           placeholderTextColor={"#888"}
           onChangeText={props.onHashtagChange}
+          autoCapitalize={"none"}
         />
       </View>
       <TouchableOpacity onPressOut={props.submit}>
