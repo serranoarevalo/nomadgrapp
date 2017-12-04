@@ -55,7 +55,10 @@ class Container extends Component {
     this.setState({ mode: "list" });
   };
   _showActionSheet = () => {
-    this.actionSheet.show();
+    const { user } = this.props;
+    if (user.is_self) {
+      this.actionSheet.show();
+    }
   };
 }
 
