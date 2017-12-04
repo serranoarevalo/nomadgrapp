@@ -28,8 +28,15 @@ const Photo = props => (
       <View style={styles.header}>
         <FadeIn>
           <Image
-            source={{ uri: props.creator.profile_image }}
+            source={
+              props.creator.profile_image
+                ? {
+                    uri: props.creator.profile_image
+                  }
+                : require("../../assets/images/noPhoto.jpg")
+            }
             style={styles.avatar}
+            defaultSource={require("../../assets/images/noPhoto.jpg")}
           />
         </FadeIn>
         <View>

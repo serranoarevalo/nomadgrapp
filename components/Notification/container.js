@@ -27,17 +27,21 @@ class Container extends Component {
     const { following } = this.state;
     let action;
     if (following) {
+      this.setState({
+        following: false
+      });
       action = await unfollowUser();
-      if (action === "ok") {
+      if (action !== "ok") {
         this.setState({
-          following: false
+          following: true
         });
       }
     } else {
+      this.setState({ following: true });
       action = await followUser();
-      if (action === "ok") {
+      if (action !== "ok") {
         this.setState({
-          following: true
+          following: false
         });
       }
     }

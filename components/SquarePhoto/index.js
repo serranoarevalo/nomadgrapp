@@ -15,7 +15,11 @@ import { API_URL } from "../../constants";
 
 const SquarePhoto = props => (
   <TouchableOpacity onPress={props.onPress}>
-    <FitImage source={{ uri: props.imageUrl }} style={styles.image} />
+    <FitImage
+      source={{ uri: props.imageUrl }}
+      style={styles.image}
+      defaultSource={require("../../assets/images/photoPlaceholder.png")}
+    />
   </TouchableOpacity>
 );
 

@@ -36,7 +36,9 @@ export default class App extends React.Component {
     return Promise.all([
       Asset.loadAsync([
         require("./assets/images/logo.png"),
-        require("./assets/images/logo-white.png")
+        require("./assets/images/logo-white.png"),
+        require("./assets/images/noPhoto.jpg"),
+        require("./assets/images/photoPlaceholder.png")
       ]),
       Font.loadAsync({
         ...Ionicons.font,

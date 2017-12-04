@@ -1,10 +1,19 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  Dimensions
+} from "react-native";
 import { API_URL } from "../../constants";
 import FadeIn from "react-native-fade-in-image";
 import Button from "../Button";
 import { withNavigation } from "react-navigation";
+
+const { width, height } = Dimensions.get("window");
 
 const Notification = props => (
   <View style={styles.container}>
@@ -17,8 +26,15 @@ const Notification = props => (
     >
       <FadeIn>
         <Image
-          source={{ uri: props.creator.profile_image }}
+          source={
+            props.creator.profile_image
+              ? {
+                  uri: props.creator.profile_image
+                }
+              : require("../../assets/images/noPhoto.jpg")
+          }
           style={styles.avatar}
+          defaultSource={require("../../assets/images/noPhoto.jpg")}
         />
       </FadeIn>
     </TouchableOpacity>
@@ -37,9 +53,11 @@ const Notification = props => (
         borderColor="#3e99ee"
       />
     ) : (
-      <FadeIn>
-        <Image source={{ uri: props.image.file }} style={styles.payload} />
-      </FadeIn>
+      <Image
+        source={{ uri: props.image.file }}
+        style={styles.payload}
+        defaultSource={require("../../assets/images/photoPlaceholder.png")}
+      />
     )}
   </View>
 );
@@ -80,7 +98,8 @@ const styles = StyleSheet.create({
     fontWeight: "600"
   },
   centerText: {
-    marginRight: "auto"
+    marginRight: "auto",
+    width: width / 2
   },
   payload: {
     height: 50,

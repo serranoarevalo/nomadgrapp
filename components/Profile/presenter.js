@@ -33,12 +33,18 @@ const Profile = props => (
     >
       <View style={styles.profile}>
         <View style={styles.header}>
-          <FadeIn>
-            <Image
-              source={{ uri: props.profile_image }}
-              style={styles.avatar}
-            />
-          </FadeIn>
+          <Image
+            source={
+              props.profile_image
+                ? {
+                    uri: props.profile_image
+                  }
+                : require("../../assets/images/noPhoto.jpg")
+            }
+            style={styles.avatar}
+            defaultSource={require("../../assets/images/noPhoto.jpg")}
+          />
+
           <View style={styles.headerColumn}>
             <View style={styles.profileNumbers}>
               <ProfileNumber number={props.post_count} text={"posts"} />
