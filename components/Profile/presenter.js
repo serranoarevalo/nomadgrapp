@@ -33,18 +33,19 @@ const Profile = props => (
     >
       <View style={styles.profile}>
         <View style={styles.header}>
-          <Image
-            source={
-              props.profile_image
-                ? {
-                    uri: props.profile_image
-                  }
-                : require("../../assets/images/noPhoto.jpg")
-            }
-            style={styles.avatar}
-            defaultSource={require("../../assets/images/noPhoto.jpg")}
-          />
-
+          <TouchableOpacity onPress={props.showActionSheet}>
+            <Image
+              source={
+                props.profile_image
+                  ? {
+                      uri: props.profile_image
+                    }
+                  : require("../../assets/images/noPhoto.jpg")
+              }
+              style={styles.avatar}
+              defaultSource={require("../../assets/images/noPhoto.jpg")}
+            />
+          </TouchableOpacity>
           <View style={styles.headerColumn}>
             <View style={styles.profileNumbers}>
               <ProfileNumber number={props.post_count} text={"posts"} />
@@ -210,7 +211,8 @@ Profile.propTypes = {
   profile_image: PropTypes.string,
   username: PropTypes.string,
   website: PropTypes.string,
-  is_self: PropTypes.bool
+  is_self: PropTypes.bool,
+  showActionSheet: PropTypes.func.isRequired
 };
 
 export default Profile;
