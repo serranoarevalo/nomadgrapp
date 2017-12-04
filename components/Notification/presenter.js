@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
   },
   centerText: {
     marginRight: "auto",
-    width: width / 2
+    width: width / 2.5
   },
   payload: {
     height: 50,
